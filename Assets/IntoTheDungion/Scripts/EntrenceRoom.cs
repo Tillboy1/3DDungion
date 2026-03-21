@@ -11,7 +11,7 @@ public class EntrenceRoom : MonoBehaviour
     {
         RoomAmount = Random.Range(RoomsMin, RoomsMax);
 
-        SummonDungion();
+        //SummonDungion();
     }
     public void SummonDungion()
     {
