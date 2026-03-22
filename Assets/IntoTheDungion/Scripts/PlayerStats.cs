@@ -58,10 +58,6 @@ public class PlayerStats : MonoBehaviour
     {
         CurrentHealth = maxHealth;
     }
-    public void Direction(InputAction.CallbackContext context)
-    {
-        Debug.Log("Turn PlayerCharacter");
-    }
 
     public void DealDamage(InputAction.CallbackContext context)
     {
@@ -106,6 +102,24 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(AttackAn());
         */
     }
+
+    public void AbilityOne(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ability Used");
+    }
+    public void AbilityTwo(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ability Used");
+    }
+    public void AbilityThree(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ability Used");
+    }
+    public void AbilityFour(InputAction.CallbackContext context)
+    {
+        Debug.Log("Ability Used");
+    }
+
     public void TakeDamage(float damage)
     {
         Debug.Log("Take Damage");
@@ -179,13 +193,7 @@ public class PlayerStats : MonoBehaviour
         CurrentHealth = maxHealth;
         this.transform.position = lastRestLocation;
 
-        this.GetComponent<SpriteRenderer>().color = Color.white;
+        //this.GetComponent<SpriteRenderer>().color = Color.white;
         //PlayerManager.instance.LoadMasks();
-    }
-    IEnumerator AttackAn()
-    {
-        //attackArea.AttackShow.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
-        //attackArea.AttackShow.SetActive(false);
     }
 }

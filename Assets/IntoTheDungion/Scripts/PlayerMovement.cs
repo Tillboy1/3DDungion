@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
     {
         m_moveAmt = context.ReadValue<Vector2>();
     }
+    public void MovePointer(InputAction.CallbackContext context)
+    {
+        m_LookAmt = context.ReadValue<Vector2>(); // Problem is the value is counting the change of the mouse not using the mouse position of the mouse
+        //Debug.Log(context.ReadValue<Vector2>());
+    }
     public void Walking()
     {
         rb.position = new Vector3(rb.position.x + (m_moveAmt.y * moveSpeed), rb.position.y, rb.position.z + (-m_moveAmt.x * moveSpeed));
@@ -40,8 +46,4 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, rotY, 0);
     }
 
-    public void movePointer(InputAction.CallbackContext context)
-    {
-        m_LookAmt = context.ReadValue<Vector2>();
-    }
 }
