@@ -6,7 +6,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody rb;
+    private Rigidbody rb;
     private Vector2 m_moveAmt;
     private Vector2 m_LookAmt;
     public float moveSpeed;
@@ -38,11 +38,15 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Looking()
     {
+        MouseLocation = Camera.main.ScreenToWorldPoint(new Vector3(m_LookAmt.x, 1, m_LookAmt.y));
+        //Ray raytest = Camera.main.ScreenPointToRay(new Vector3(m_LookAmt.x, 1, m_LookAmt.y));
 
-        MouseLocation = Camera.main.ScreenToWorldPoint(m_LookAmt);
+        //Debug.Log(m_LookAmt + " mouse " + MouseLocation + " Location");
+
         Vector3 rotation = MouseLocation - transform.position;
+        //Debug.Log(rotation + "=" + MouseLocation + "-" + transform.position);
 
-        float rotY = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, rotY, 0);
     }
 
