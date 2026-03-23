@@ -1,18 +1,27 @@
-using JetBrains.Annotations;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     private Rigidbody rb;
     private Vector2 m_moveAmt;
     private Vector2 m_LookAmt;
     public float moveSpeed;
+    public PlayerInput input;
 
     public Vector3 MouseLocation;
     public Vector3 hitPosition;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if (!IsOwner)
+        {
+            input.enabled = false;
+        }
+    }
 
     private void Start()
     {
@@ -51,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
         {
             hitPosition = rayinfo.point;
             Debug.DrawLine(hitPosition, hitPosition + new Vector3(0, 3, 0));
-            Debug.Log(hitPosition);
         }
 
         Vector3 rotation = hitPosition - transform.position;

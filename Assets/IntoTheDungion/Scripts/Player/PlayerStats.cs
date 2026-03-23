@@ -21,8 +21,10 @@ public class PlayerStats : MonoBehaviour
     private bool ableToInteract = true;
 
     [Header("Combat")]
-    public int damage;
+    public int primaryDamage;
     private bool AbleToAttack = true;
+
+    public List<GameObject> Attackable;
 
     public bool AbleToMove = true;
     public bool currentlyDead = false;
@@ -61,18 +63,15 @@ public class PlayerStats : MonoBehaviour
 
     public void DealDamage(InputAction.CallbackContext context)
     {
-        /*
-        List<GameObject> attackAreaObject = this.GetComponentInChildren<AttackArea>().Attackobject;
-
-        for (int i = 0; i < attackAreaObject.Count; i++)
+        for (int i = 0; i < Attackable.Count; i++)
         {
-            if (attackAreaObject[i].transform.GetComponent<Enemies>())
+            if (Attackable[i].transform.GetComponent<BaseEnemy>())
             {
                 if (AbleToAttack)
                 {
-                    attackAreaObject[i].transform.GetComponent<Enemies>().TakeDamage(damage);
+                    Attackable[i].transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage);
 
-                    // Soul Focus
+                    /* Soul Focus
                     if (focusAmount + focusOnHit >= MaxFocus)
                     {
                         focusAmount = MaxFocus;
@@ -87,6 +86,7 @@ public class PlayerStats : MonoBehaviour
                         AbilityReady = true;
                     }
                     PlayerManager.instance.LoadFocus();
+                    */
 
                     //Reset Attacks
                     AbleToAttack = false;
@@ -99,8 +99,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        StartCoroutine(AttackAn());
-        */
+        //StartCoroutine(AttackAn());
     }
 
     public void AbilityOne(InputAction.CallbackContext context)
