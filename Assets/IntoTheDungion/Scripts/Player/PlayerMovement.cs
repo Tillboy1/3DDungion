@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
 
     public Vector3 MouseLocation;
+    public Vector3 hitPosition;
 
     private void Start()
     {
@@ -19,8 +20,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Update()
     {
-        Walking();
         Looking();
+    }
+    private void FixedUpdate()
+    {
+        Walking();
     }
 
     public void MoveInput(InputAction.CallbackContext context)
@@ -38,13 +42,19 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Looking()
     {
-        MouseLocation = Camera.main.ScreenToWorldPoint(new Vector3(m_LookAmt.x, 1, m_LookAmt.y));
-        //Ray raytest = Camera.main.ScreenPointToRay(new Vector3(m_LookAmt.x, 1, m_LookAmt.y));
+        Ray raytest = Camera.main.ScreenPointToRay(new Vector3(m_LookAmt.x, m_LookAmt.y));
+        //Ray raytest = Camera.main.ScreenPointToRay(Mouse.current.position.value);
 
-        //Debug.Log(m_LookAmt + " mouse " + MouseLocation + " Location");
+        RaycastHit rayinfo;
 
-        Vector3 rotation = MouseLocation - transform.position;
-        //Debug.Log(rotation + "=" + MouseLocation + "-" + transform.position);
+        if(Physics.Raycast(raytest, out rayinfo, 100f))
+        {
+            hitPosition = rayinfo.point;
+            Debug.DrawLine(hitPosition, hitPosition + new Vector3(0, 3, 0));
+            Debug.Log(hitPosition);
+        }
+
+        Vector3 rotation = hitPosition - transform.position;
 
         float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, rotY, 0);
