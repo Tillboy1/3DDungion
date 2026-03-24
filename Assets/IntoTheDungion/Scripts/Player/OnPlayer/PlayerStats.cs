@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+public enum AbilityState
+{
+    Ready,
+    Active,
+    Cooldown
+}
 public class PlayerStats : MonoBehaviour
 {
-
     private GameObject TestSpawnLocation;
     public Vector2 lastRestLocation;
 
@@ -32,13 +38,10 @@ public class PlayerStats : MonoBehaviour
     public bool IsResting;
 
     [Header("Abilities")]
-    //public float focusAmount;
-    //public float MaxFocus = 100;
-    //public int focusOnHit = 10;
-    //
-    //public float FocusTaken = 70;
-    //public int HealingAmount;
-    //public bool AbilityReady = false;
+    public bool isCasting = false;
+    public List<AbilitiesBase> Abilities = new List<AbilitiesBase>();
+
+    public AbilitiesBase[] ActiveAbilities = new AbilitiesBase[4];
 
     private Vector2 m_moveAmt;
     private Rigidbody2D m_rigidbodyb;
@@ -62,6 +65,13 @@ public class PlayerStats : MonoBehaviour
     public void Start()
     {
         CurrentHealth = maxHealth;
+
+        this.transform.position = new Vector3(0, 1.7f, 0);
+    }
+
+    private void Update()
+    {
+        CheckAbilities();
     }
 
     public void DealDamage(InputAction.CallbackContext context)
@@ -105,22 +115,81 @@ public class PlayerStats : MonoBehaviour
         //StartCoroutine(AttackAn());
     }
 
-    public void AbilityOne(InputAction.CallbackContext context)
+    #region Abilities
+    public void CheckAbilities()
     {
-        Debug.Log("Ability Used");
+        for(int i = 0;i < ActiveAbilities.Length; i++)
+        {
+            switch (ActiveAbilities[i].AbilityState)
+            {
+                case AbilityState.Ready:
+                    // Done with input actions
+                    break;
+                case AbilityState.Active:
+                    isCasting = true;
+                    if (ActiveAbilities[i].RemainingCasting > 0)
+                    {
+                        ActiveAbilities[i].RemainingCasting -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        ActiveAbilities[0].Activate();
+                        isCasting = false;
+                        ActiveAbilities[i].AbilityState = AbilityState.Cooldown;
+                    }
+                    break;
+                case AbilityState.Cooldown:
+                    if (ActiveAbilities[i].RemainingRefresh > 0)
+                    {
+                        ActiveAbilities[i].RemainingRefresh -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        ActiveAbilities[i].AbilityState = AbilityState.Ready;
+                    }
+                    break;
+            }
+        }
     }
-    public void AbilityTwo(InputAction.CallbackContext context)
+
+    public void ActivateAbilityOne(InputAction.CallbackContext context)
     {
-        Debug.Log("Ability Used");
+        if (ActiveAbilities[0].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+
+            ActiveAbilities[0].AbilityState = AbilityState.Active;
+            ActiveAbilities[0].RemainingCasting = ActiveAbilities[0].CastingTime;
+        }
     }
-    public void AbilityThree(InputAction.CallbackContext context)
+    public void ActivateAbilityTwo(InputAction.CallbackContext context)
     {
-        Debug.Log("Ability Used");
+        if (ActiveAbilities[1].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[1].AbilityState = AbilityState.Active;
+            ActiveAbilities[1].RemainingCasting = ActiveAbilities[1].CastingTime;
+        }
     }
-    public void AbilityFour(InputAction.CallbackContext context)
+    public void ActivateAbilityThree(InputAction.CallbackContext context)
     {
-        Debug.Log("Ability Used");
+        if (ActiveAbilities[2].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[2].AbilityState = AbilityState.Active;
+            ActiveAbilities[2].RemainingCasting = ActiveAbilities[2].CastingTime;
+        }
     }
+    public void ActivateAbilityFour(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[3].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[3].AbilityState = AbilityState.Active;
+            ActiveAbilities[3].RemainingCasting = ActiveAbilities[3].CastingTime;
+        }
+    }
+    #endregion
 
     public void OpenCharacterSheet(InputAction.CallbackContext context)
     {
@@ -134,6 +203,17 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void BaseHeal(int Healing)
+    {
+        if (CurrentHealth + Healing <= maxHealth)
+        {
+            CurrentHealth += Healing;
+        }
+        else if (CurrentHealth + Healing > maxHealth)
+        {
+            CurrentHealth = maxHealth;
+        }
+    }
     public void TakeDamage(float damage)
     {
         Debug.Log("Take Damage");
