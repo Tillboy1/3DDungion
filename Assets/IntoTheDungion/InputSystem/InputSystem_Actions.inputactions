@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CharacterOpen",
+                    "type": "Button",
+                    "id": "90e57121-1706-4f37-9b14-f8f1e1115b06",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -462,10 +471,10 @@
                 {
                     "name": "",
                     "id": "8da79728-db28-46da-90e7-4e215962cccc",
-                    "path": "",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "AbilityOne",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -473,10 +482,10 @@
                 {
                     "name": "",
                     "id": "6c13b21c-8e13-4ec9-8eb0-0a0b8a8ae76b",
-                    "path": "",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "AbilityTwo",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -484,10 +493,10 @@
                 {
                     "name": "",
                     "id": "68ff65ce-f934-4dc8-8ab1-75e58a692e31",
-                    "path": "",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "AbilityThree",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -495,11 +504,22 @@
                 {
                     "name": "",
                     "id": "4139992b-8936-4358-b829-0770eae06045",
-                    "path": "",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "AbilityFour",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16cf0f8b-e0c0-45de-a256-3e8432c102df",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CharacterOpen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

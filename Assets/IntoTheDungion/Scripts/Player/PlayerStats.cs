@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("UI")]
     public bool UIOpen;
+    public GameObject CharacterSheet;
 
     [Header("Health")]
     public float CurrentHealth;
@@ -47,6 +48,8 @@ public class PlayerStats : MonoBehaviour
         m_rigidbodyb = GetComponent<Rigidbody2D>();
 
         TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
+        CharacterSheet = GameObject.FindGameObjectWithTag("UI").transform.GetChild(1).gameObject;
+
         if (TestSpawnLocation != null)
         {
             this.transform.position = TestSpawnLocation.transform.position;
@@ -117,6 +120,18 @@ public class PlayerStats : MonoBehaviour
     public void AbilityFour(InputAction.CallbackContext context)
     {
         Debug.Log("Ability Used");
+    }
+
+    public void OpenCharacterSheet(InputAction.CallbackContext context)
+    {
+        if (CharacterSheet.activeSelf)
+        {
+            CharacterSheet.SetActive(false);
+        }
+        else
+        {
+            CharacterSheet.SetActive(true);
+        }
     }
 
     public void TakeDamage(float damage)
