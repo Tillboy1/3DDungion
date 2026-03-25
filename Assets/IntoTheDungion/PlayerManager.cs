@@ -1,16 +1,37 @@
 using UnityEngine;
+using UnityEngine.Networking;
+using Unity.Netcode;
+using UnityEngine.Rendering;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static PlayerManager instance;
+
+    public GameObject[] Players;
+
+
+    public void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerJoined(GameObject PlayerJoining)
     {
-        
+        for (int i = 0; i < Players.Length; i++)
+        {
+            if (Players[i] != null)
+            {
+                Players[i] = PlayerJoining.gameObject;
+                return;
+            }
+            Debug.Log("To many Players"); 
+        }
     }
 }
