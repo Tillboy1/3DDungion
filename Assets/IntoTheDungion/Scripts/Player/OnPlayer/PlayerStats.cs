@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AdaptivePerformance.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,9 +16,13 @@ public class PlayerStats : MonoBehaviour
     private GameObject TestSpawnLocation;
     public Vector2 lastRestLocation;
 
+    public string CharacterName;
+
     [Header("UI")]
     public bool UIOpen;
     public GameObject CharacterSheet;
+
+    public Sprite CharacterSprite;
 
     [Header("Health")]
     public float CurrentHealth;
@@ -37,6 +42,15 @@ public class PlayerStats : MonoBehaviour
     public bool currentlyDead = false;
     public bool IsResting;
 
+    [Header("Leveling")]
+    public int CurrentLevel;
+
+    public float CurrentXp;
+    public float RequiredXp;
+
+    public int[] XpRequireBounus;
+    public float[] XpLevelBonus;
+
     [Header("Abilities")]
     public bool isCasting = false;
     public List<AbilitiesBase> Abilities = new List<AbilitiesBase>();
@@ -51,7 +65,8 @@ public class PlayerStats : MonoBehaviour
         m_rigidbodyb = GetComponent<Rigidbody2D>();
 
         TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
-        CharacterSheet = GameObject.FindGameObjectWithTag("UI").transform.GetChild(1).gameObject;
+        GameObject.FindGameObjectWithTag("UI").transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
+        CharacterSheet = GameObject.FindGameObjectWithTag("UI").transform.GetChild(2).gameObject;
 
         if (TestSpawnLocation != null)
         {
