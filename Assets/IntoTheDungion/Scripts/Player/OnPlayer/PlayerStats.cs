@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
     public bool isCasting = false;
     public List<AbilitiesBase> Abilities = new List<AbilitiesBase>();
 
-    public AbilitiesBase[] ActiveAbilities = new AbilitiesBase[4];
+    public AbilitiesBase[] ActiveAbilities = new AbilitiesBase[10];
 
     private Vector2 m_moveAmt;
     private Rigidbody2D m_rigidbodyb;
@@ -120,34 +120,37 @@ public class PlayerStats : MonoBehaviour
     {
         for(int i = 0;i < ActiveAbilities.Length; i++)
         {
-            switch (ActiveAbilities[i].AbilityState)
+            if (ActiveAbilities[i] != null)
             {
-                case AbilityState.Ready:
-                    // Done with input actions
-                    break;
-                case AbilityState.Active:
-                    isCasting = true;
-                    if (ActiveAbilities[i].RemainingCasting > 0)
-                    {
-                        ActiveAbilities[i].RemainingCasting -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        ActiveAbilities[0].Activate();
-                        isCasting = false;
-                        ActiveAbilities[i].AbilityState = AbilityState.Cooldown;
-                    }
-                    break;
-                case AbilityState.Cooldown:
-                    if (ActiveAbilities[i].RemainingRefresh > 0)
-                    {
-                        ActiveAbilities[i].RemainingRefresh -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        ActiveAbilities[i].AbilityState = AbilityState.Ready;
-                    }
-                    break;
+                switch (ActiveAbilities[i].AbilityState)
+                {
+                    case AbilityState.Ready:
+                        // Done with input actions
+                        break;
+                    case AbilityState.Active:
+                        isCasting = true;
+                        if (ActiveAbilities[i].RemainingCasting > 0)
+                        {
+                            ActiveAbilities[i].RemainingCasting -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            ActiveAbilities[i].Activate(this.gameObject);
+                            isCasting = false;
+                            ActiveAbilities[i].AbilityState = AbilityState.Cooldown;
+                        }
+                        break;
+                    case AbilityState.Cooldown:
+                        if (ActiveAbilities[i].RemainingRefresh > 0)
+                        {
+                            ActiveAbilities[i].RemainingRefresh -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            ActiveAbilities[i].AbilityState = AbilityState.Ready;
+                        }
+                        break;
+                }
             }
         }
     }
@@ -189,8 +192,66 @@ public class PlayerStats : MonoBehaviour
             ActiveAbilities[3].RemainingCasting = ActiveAbilities[3].CastingTime;
         }
     }
+    public void ActivateAbilityFive(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[4].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[4].AbilityState = AbilityState.Active;
+            ActiveAbilities[4].RemainingCasting = ActiveAbilities[4].CastingTime;
+        }
+    }
+    public void ActivateAbilitySix(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[5].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[5].AbilityState = AbilityState.Active;
+            ActiveAbilities[5].RemainingCasting = ActiveAbilities[5].CastingTime;
+        }
+    }
+    public void ActivateAbilitySeven(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[6].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[6].AbilityState = AbilityState.Active;
+            ActiveAbilities[6].RemainingCasting = ActiveAbilities[6].CastingTime;
+        }
+    }
+    public void ActivateAbilityEight(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[7].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[7].AbilityState = AbilityState.Active;
+            ActiveAbilities[7].RemainingCasting = ActiveAbilities[7].CastingTime;
+        }
+    }
+    public void ActivateAbilitynine(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[8].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[8].AbilityState = AbilityState.Active;
+            ActiveAbilities[8].RemainingCasting = ActiveAbilities[8].CastingTime;
+        }
+    }
+    public void ActivateAbilityZero(InputAction.CallbackContext context)
+    {
+        if (ActiveAbilities[9].AbilityState == AbilityState.Ready && !isCasting)
+        {
+            Debug.Log("Ability Used");
+            ActiveAbilities[9].AbilityState = AbilityState.Active;
+            ActiveAbilities[9].RemainingCasting = ActiveAbilities[9].CastingTime;
+        }
+    }
     #endregion
-
+    #region Menu
+    public void OpenUI(InputAction.CallbackContext context)
+    {
+        Debug.Log("trying to open Game menu");
+    }
     public void OpenCharacterSheet(InputAction.CallbackContext context)
     {
         if (CharacterSheet.activeSelf)
@@ -202,7 +263,8 @@ public class PlayerStats : MonoBehaviour
             CharacterSheet.SetActive(true);
         }
     }
-
+    #endregion
+    #region Health
     public void BaseHeal(int Healing)
     {
         if (CurrentHealth + Healing <= maxHealth)
@@ -265,6 +327,7 @@ public class PlayerStats : MonoBehaviour
 
         StartCoroutine(DeathCo());
     }
+    #endregion
 
     IEnumerator WaitReact()
     {

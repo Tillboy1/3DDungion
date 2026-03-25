@@ -8,8 +8,6 @@ public class AbilitiesBase : ScriptableObject
     public string Description;
     public string ClassRequired;
 
-    public GameObject player;
-
     [Header("Casting")]
     public float CastingTime;
     public float RefreshTime;
@@ -20,14 +18,14 @@ public class AbilitiesBase : ScriptableObject
     public float RemainingRefresh;
 
     [Header("Leveling UP")]
-    public int CurrentLevel;
-    public int MaxLevel;
+    public int CurrentLevel = 1;
+    public int MaxLevel = 10;
 
     public int CurrentEX;
-    public int EXPToLevel;
+    public int EXPToLevel = 1;
     public int[] EXPDifficulties;
 
-    public virtual void Activate() {}
+    public virtual void Activate(GameObject Player) {}
 
     public void AbilityRegiven()
     {

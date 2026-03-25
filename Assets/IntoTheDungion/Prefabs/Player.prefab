@@ -243,7 +243,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198532364787824621}
         m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
-        m_MethodName: AbilityOne
+        m_MethodName: ActivateAbilityOne
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -259,7 +259,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198532364787824621}
         m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
-        m_MethodName: AbilityTwo
+        m_MethodName: ActivateAbilityTwo
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -275,7 +275,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198532364787824621}
         m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
-        m_MethodName: AbilityThree
+        m_MethodName: ActivateAbilityThree
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -291,7 +291,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198532364787824621}
         m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
-        m_MethodName: AbilityFour
+        m_MethodName: ActivateAbilityFour
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -319,6 +319,102 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 90e57121-1706-4f37-9b14-f8f1e1115b06
     m_ActionName: 'Player/CharacterOpen[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilityFive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d57d25a8-5e40-4303-aa89-1e63322fb6ae
+    m_ActionName: 'Player/AbilityFive[/Keyboard/5]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilitySix
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8aeb6994-dd93-47d7-8271-75a706de9b4e
+    m_ActionName: 'Player/AbilitySix[/Keyboard/6]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilitySeven
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 41874aaa-d98e-44ea-b817-4784716d5add
+    m_ActionName: 'Player/AbilitySeven[/Keyboard/7]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilityEight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7bd01c26-9b2c-4122-a07f-79ff9bb1f280
+    m_ActionName: 'Player/AbilityEight[/Keyboard/8]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilitynine
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79fa0f02-a3e0-4f82-ba61-e11bf46729d5
+    m_ActionName: 'Player/AbilityNine[/Keyboard/9]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: ActivateAbilityZero
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 88262566-58f7-405c-8dca-c113acae3c73
+    m_ActionName: 'Player/AbilityZero[/Keyboard/0]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -382,7 +478,7 @@ MonoBehaviour:
   UIOpen: 0
   CharacterSheet: {fileID: 0}
   CurrentHealth: 0
-  maxHealth: 0
+  maxHealth: 10
   tempHealth: 0
   interacting: 0
   primaryDamage: 0
@@ -390,6 +486,19 @@ MonoBehaviour:
   AbleToMove: 1
   currentlyDead: 0
   IsResting: 0
+  isCasting: 0
+  Abilities: []
+  ActiveAbilities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &844963913527231648
 Rigidbody:
   m_ObjectHideFlags: 0
