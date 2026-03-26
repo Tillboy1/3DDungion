@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AdaptivePerformance.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -76,6 +75,7 @@ public class PlayerStats : MonoBehaviour
         {
             this.transform.position = lastRestLocation;
         }
+        PlayerManager.instance.PlayerJoined(this.gameObject);
     }
     public void Start()
     {

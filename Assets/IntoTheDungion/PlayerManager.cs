@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Unity.Netcode;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public GameObject[] Players;
+    public List<GameObject> Players;
 
 
     public void Awake()
@@ -24,14 +25,7 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerJoined(GameObject PlayerJoining)
     {
-        for (int i = 0; i < Players.Length; i++)
-        {
-            if (Players[i] != null)
-            {
-                Players[i] = PlayerJoining.gameObject;
-                return;
-            }
-            Debug.Log("To many Players"); 
-        }
+        Players.Add(PlayerJoining.gameObject);
+        FindFirstObjectByType<TeamHealthUI>().PlayerCheck();
     }
 }
