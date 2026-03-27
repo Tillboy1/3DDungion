@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Collections;
 
 
 public enum AbilityState
@@ -10,12 +12,13 @@ public enum AbilityState
     Active,
     Cooldown
 }
-public class PlayerStats : MonoBehaviour
+[GenerateSerializationForTypeAttribute(typeof(string))]
+public class PlayerStats : NetworkBehaviour
 {
     private GameObject TestSpawnLocation;
     public Vector2 lastRestLocation;
 
-    public string CharacterName;
+    public NetworkVariable<FixedString64Bytes> characterName;
 
     [Header("UI")]
     public bool UIOpen;
@@ -24,9 +27,13 @@ public class PlayerStats : MonoBehaviour
     public Sprite CharacterSprite;
 
     [Header("Health")]
-    public float CurrentHealth;
-    public float maxHealth;
-    public float tempHealth = 0;
+    public NetworkVariable<float> CurrentHealth;
+    public NetworkVariable<float> maxHealth;
+    public NetworkVariable<float> Sheild;
+
+    //public float CurrentHealth;
+    //public float maxHealth;
+    //public float Sheild = 0;
 
     public bool interacting;
     private bool ableToInteract = true;
@@ -42,10 +49,10 @@ public class PlayerStats : MonoBehaviour
     public bool IsResting;
 
     [Header("Leveling")]
-    public int CurrentLevel;
+    public NetworkVariable<int> CurrentLevel;
 
-    public float CurrentXp;
-    public float RequiredXp;
+    public NetworkVariable<float> CurrentXp;
+    public NetworkVariable<float> RequiredXp;
 
     public int[] XpRequireBounus;
     public float[] XpLevelBonus;
@@ -66,6 +73,7 @@ public class PlayerStats : MonoBehaviour
         TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
         GameObject.FindGameObjectWithTag("UI").transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
         CharacterSheet = GameObject.FindGameObjectWithTag("UI").transform.GetChild(2).gameObject;
+        CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
 
         if (TestSpawnLocation != null)
         {
@@ -79,7 +87,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void Start()
     {
-        CurrentHealth = maxHealth;
+        CurrentHealth.Value = maxHealth.Value;
 
         this.transform.position = new Vector3(0, 1.7f, 0);
     }
@@ -282,54 +290,54 @@ public class PlayerStats : MonoBehaviour
     #region Health
     public void BaseHeal(int Healing)
     {
-        if (CurrentHealth + Healing <= maxHealth)
+        if (CurrentHealth.Value + Healing <= maxHealth.Value)
         {
-            CurrentHealth += Healing;
+            CurrentHealth.Value += Healing;
         }
-        else if (CurrentHealth + Healing > maxHealth)
+        else if (CurrentHealth.Value + Healing > maxHealth.Value)
         {
-            CurrentHealth = maxHealth;
+            CurrentHealth.Value = maxHealth.Value;
         }
     }
     public void TakeDamage(float damage)
     {
         Debug.Log("Take Damage");
-        if (tempHealth > 0)
+        if (Sheild.Value > 0)
         {
-            if (tempHealth - damage < 0)
+            if (Sheild.Value - damage < 0)
             {
                 Debug.Log("spillover");
-                float tempint = damage - tempHealth;
+                float tempint = damage - Sheild.Value;
 
-                tempHealth = 0;
+                Sheild.Value = 0;
                 Debug.Log(damage + " = " + tempint);
                 damage = tempint;
             }
-            else if (tempHealth - damage == 0)
+            else if (Sheild.Value - damage == 0)
             {
-                tempHealth = 0;
+                Sheild.Value = 0;
                 damage = 0;
             }
             else
             {
                 Debug.Log("tempHealth Damage");
 
-                float tempint = tempHealth - damage;
+                float tempint = Sheild.Value - damage;
 
-                tempHealth -= tempint;
+                Sheild.Value -= tempint;
                 damage = 0;
             }
         }
 
-        if (CurrentHealth - damage > 0)
+        if (CurrentHealth.Value - damage > 0)
         {
-            CurrentHealth -= damage;
+            CurrentHealth.Value -= damage;
             //PlayerManager.instance.LoadMasks();
             Debug.Log("showing health is not set");
         }
         else
         {
-            CurrentHealth = 0;
+            CurrentHealth.Value = 0;
             //PlayerManager.instance.LoadMasks();
             Die();
         }
@@ -362,7 +370,7 @@ public class PlayerStats : MonoBehaviour
 
         currentlyDead = false;
 
-        CurrentHealth = maxHealth;
+        CurrentHealth.Value = maxHealth.Value;
         this.transform.position = lastRestLocation;
 
         //this.GetComponent<SpriteRenderer>().color = Color.white;
