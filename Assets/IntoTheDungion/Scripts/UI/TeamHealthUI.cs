@@ -51,7 +51,6 @@ public class TeamHealthUI : MonoBehaviour
         {
             if (PlayerManager.instance.Players[i] != PlayerObj)
             {
-                Debug.Log("Temp2");
                 tempGO.Add(PlayerManager.instance.Players[i]);
             }
         }
@@ -101,7 +100,7 @@ public class TeamHealthUI : MonoBehaviour
             PlayerSprite.sprite = PlayerObj.GetComponent<PlayerStats>().CharacterSprite;
             CharacterHealth.value = PlayerObj.GetComponent<PlayerStats>().CurrentHealth.Value / PlayerObj.GetComponent<PlayerStats>().maxHealth.Value;
             CharacterXP.value = PlayerObj.GetComponent<PlayerStats>().CurrentXp.Value / PlayerObj.GetComponent<PlayerStats>().RequiredXp.Value;
-            CharName.text = PlayerObj.GetComponent<PlayerStats>().characterName.Value.ToString();
+            //CharName.text = PlayerObj.GetComponent<PlayerStats>().characterName.Value.ToString();
             CharLevel.text = PlayerObj.GetComponent<PlayerStats>().CurrentLevel.Value.ToString();
         }
     }
@@ -150,6 +149,7 @@ public class TeamHealthUI : MonoBehaviour
                         }
                         else if (Childs.gameObject.name == "Level Text")
                         {
+                            Debug.Log("well this was a good idea " + Childs.gameObject);
                             CharLevel = Childs.gameObject.GetComponent<TMP_Text>();
                         }
                     }
@@ -157,7 +157,8 @@ public class TeamHealthUI : MonoBehaviour
                     //PlayerSprite.sprite = TeamObj[i].GetComponent<PlayerStats>().CharacterSprite;
                     CharacterHealth.value = TeamObj[i].GetComponent<PlayerStats>().CurrentHealth.Value / TeamObj[i].GetComponent<PlayerStats>().maxHealth.Value;
                     CharacterXP.value = TeamObj[i].GetComponent<PlayerStats>().CurrentXp.Value / TeamObj[i].GetComponent<PlayerStats>().RequiredXp.Value;
-                    CharName.text = TeamObj[i].GetComponent<PlayerStats>().characterName.Value.ToString();
+                    //CharName.text = TeamObj[i].GetComponent<PlayerStats>().characterName.Value.ToString();
+
                     CharLevel.text = TeamObj[i].GetComponent<PlayerStats>().CurrentLevel.Value.ToString();
                 }
             }

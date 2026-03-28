@@ -66,6 +66,14 @@ public class PlayerStats : NetworkBehaviour
     private Vector2 m_moveAmt;
     private Rigidbody2D m_rigidbodyb;
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsLocalPlayer)
+        {
+            // spawn UI
+        }
+    }
+
     private void Awake()
     {
         m_rigidbodyb = GetComponent<Rigidbody2D>();
