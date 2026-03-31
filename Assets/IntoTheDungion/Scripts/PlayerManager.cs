@@ -28,6 +28,8 @@ public class PlayerManager : MonoBehaviour
         Players.Add(PlayerJoining.gameObject);
 
 
+        Debug.Log(PlayerJoining);
+        Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI);
         Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());
         PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
     }

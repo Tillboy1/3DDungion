@@ -69,6 +69,23 @@ public class PlayerStats : NetworkBehaviour
     private Vector2 m_moveAmt;
     private Rigidbody2D m_rigidbodyb;
 
+
+    private void Awake()
+    {
+        Debug.Log("check 1");
+        m_rigidbodyb = GetComponent<Rigidbody2D>();
+
+        TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
+
+        if (TestSpawnLocation != null)
+        {
+            this.transform.position = TestSpawnLocation.transform.position;
+        }
+        else
+        {
+            this.transform.position = lastRestLocation;
+        }
+    }
     public override void OnNetworkSpawn()
     {
         if (IsLocalPlayer)
@@ -83,27 +100,12 @@ public class PlayerStats : NetworkBehaviour
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
             CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
         }
-
+        Debug.Log("Check 2");
         PlayerManager.instance.PlayerJoined(this.gameObject);
-    }
-
-    private void Awake()
-    {
-        m_rigidbodyb = GetComponent<Rigidbody2D>();
-
-        TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
-
-        if (TestSpawnLocation != null)
-        {
-            this.transform.position = TestSpawnLocation.transform.position;
-        }
-        else
-        {
-            this.transform.position = lastRestLocation;
-        }
     }
     public void Start()
     {
+        Debug.Log("check 3");
         CurrentHealth.Value = maxHealth.Value;
 
         this.transform.position = new Vector3(0, 7f, 0);
