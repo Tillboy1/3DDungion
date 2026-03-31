@@ -22,6 +22,9 @@ public class PlayerStats : NetworkBehaviour
 
     [Header("UI")]
     public bool UIOpen;
+
+    public GameObject UIPrefab;
+
     public GameObject CharacterSheet;
 
     public Sprite CharacterSprite;
@@ -71,6 +74,11 @@ public class PlayerStats : NetworkBehaviour
         if (IsLocalPlayer)
         {
             // spawn UI
+            var Menu = Instantiate(UIPrefab);
+            Menu.GetComponentInChildren<TeamHealthUI>().PlayerObj = this.gameObject;
+            Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
+            CharacterSheet = Menu.transform.GetChild(2).gameObject;
+            CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
         }
     }
 
@@ -79,9 +87,6 @@ public class PlayerStats : NetworkBehaviour
         m_rigidbodyb = GetComponent<Rigidbody2D>();
 
         TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
-        GameObject.FindGameObjectWithTag("UI").transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
-        CharacterSheet = GameObject.FindGameObjectWithTag("UI").transform.GetChild(2).gameObject;
-        CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
 
         if (TestSpawnLocation != null)
         {
