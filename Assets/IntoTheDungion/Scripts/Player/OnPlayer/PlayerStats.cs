@@ -25,8 +25,8 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject UIPrefab;
 
+    public GameObject HealthUI;
     public GameObject CharacterSheet;
-
     public Sprite CharacterSprite;
 
     [Header("Health")]
@@ -75,11 +75,16 @@ public class PlayerStats : NetworkBehaviour
         {
             // spawn UI
             var Menu = Instantiate(UIPrefab);
+
+            HealthUI = Menu.GetComponentInChildren<TeamHealthUI>().gameObject;
+            CharacterSheet = Menu.transform.GetChild(2).gameObject;
+
             Menu.GetComponentInChildren<TeamHealthUI>().PlayerObj = this.gameObject;
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
-            CharacterSheet = Menu.transform.GetChild(2).gameObject;
             CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
         }
+
+        PlayerManager.instance.PlayerJoined(this.gameObject);
     }
 
     private void Awake()
@@ -96,13 +101,12 @@ public class PlayerStats : NetworkBehaviour
         {
             this.transform.position = lastRestLocation;
         }
-        PlayerManager.instance.PlayerJoined(this.gameObject);
     }
     public void Start()
     {
         CurrentHealth.Value = maxHealth.Value;
 
-        this.transform.position = new Vector3(0, 1.7f, 0);
+        this.transform.position = new Vector3(0, 7f, 0);
     }
 
     private void Update()

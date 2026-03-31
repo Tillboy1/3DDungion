@@ -26,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     public void PlayerJoined(GameObject PlayerJoining)
     {
         Players.Add(PlayerJoining.gameObject);
-        FindFirstObjectByType<TeamHealthUI>().PlayerCheck();
+
+
+        Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());
+        PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
     }
 }

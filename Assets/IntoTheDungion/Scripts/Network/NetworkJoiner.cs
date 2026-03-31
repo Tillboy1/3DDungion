@@ -11,6 +11,7 @@ public class NetworkJoiner : MonoBehaviour
         if(manager != null)
         {
             manager.StartHost();
+            Destroy(this.gameObject);
         }
     }
 
@@ -19,6 +20,7 @@ public class NetworkJoiner : MonoBehaviour
         if(manager != null)
         {
             manager.StartClient();
+            Destroy(this.gameObject);
         }
     }
 }

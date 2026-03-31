@@ -26,6 +26,8 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        this.GetComponent<PlayerStats>().enabled = true;
     }
     public void Update()
     {
