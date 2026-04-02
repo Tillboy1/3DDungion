@@ -10,7 +10,6 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> Players;
 
-
     public void Awake()
     {
         if (instance == null)
@@ -27,10 +26,14 @@ public class PlayerManager : MonoBehaviour
     {
         Players.Add(PlayerJoining.gameObject);
 
+        PlayerJoining.name = ("Player " + Players.Count.ToString());
 
-        Debug.Log(PlayerJoining);
-        Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI);
-        Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());
-        PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
+        Debug.Log(PlayerJoining.name);
+
+        if (PlayerJoining.GetComponent<PlayerStats>().HealthUI)
+        {
+            Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());
+            PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
+        }
     }
 }

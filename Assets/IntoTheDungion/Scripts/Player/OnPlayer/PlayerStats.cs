@@ -39,7 +39,7 @@ public class PlayerStats : NetworkBehaviour
     //public float Sheild = 0;
 
     public bool interacting;
-    private bool ableToInteract = true;
+    //private bool ableToInteract = true;
 
     [Header("Combat")]
     public int primaryDamage;
@@ -72,7 +72,6 @@ public class PlayerStats : NetworkBehaviour
 
     private void Awake()
     {
-        Debug.Log("check 1");
         m_rigidbodyb = GetComponent<Rigidbody2D>();
 
         TestSpawnLocation = GameObject.FindGameObjectWithTag("TestUsage");
@@ -100,12 +99,10 @@ public class PlayerStats : NetworkBehaviour
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
             CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
         }
-        Debug.Log("Check 2");
         PlayerManager.instance.PlayerJoined(this.gameObject);
     }
     public void Start()
     {
-        Debug.Log("check 3");
         CurrentHealth.Value = maxHealth.Value;
 
         this.transform.position = new Vector3(0, 7f, 0);
@@ -375,7 +372,7 @@ public class PlayerStats : NetworkBehaviour
     {
         yield return new WaitForSeconds(.3f);
 
-        ableToInteract = true;
+        //ableToInteract = true;
     }
     IEnumerator WaitAttack()
     {

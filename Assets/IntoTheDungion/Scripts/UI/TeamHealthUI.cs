@@ -46,17 +46,27 @@ public class TeamHealthUI : MonoBehaviour
             //TeamObj.Clear();
         }
 
+        Debug.Log(PlayerManager.instance.Players.Count + "count " + "shti");
+
         List<GameObject> tempGO = new List<GameObject>();
         for (int i = 0; i < PlayerManager.instance.Players.Count; i++)
         {
+            Debug.Log(PlayerManager.instance.Players[i].gameObject.name);
+            
             if (PlayerManager.instance.Players[i] != PlayerObj)
             {
+                Debug.Log("Addingobj");
                 tempGO.Add(PlayerManager.instance.Players[i]);
+            }
+            else
+            {
+                Debug.Log("PlayerObj");
             }
         }
 
         for (int i = 0; i < tempGO.Count; i++)
         {
+            Debug.Log("test " + i);
             TeamObj.Add(tempGO[i]);
         }
     }
@@ -155,6 +165,12 @@ public class TeamHealthUI : MonoBehaviour
                     }
 
                     //PlayerSprite.sprite = TeamObj[i].GetComponent<PlayerStats>().CharacterSprite;
+
+                    Debug.Log(TeamObj[i].name);
+
+                    Debug.Log(TeamObj[i].GetComponent<PlayerStats>().CurrentHealth.Value);
+                    Debug.Log(TeamObj[i].GetComponent<PlayerStats>().maxHealth.Value);
+
                     CharacterHealth.value = TeamObj[i].GetComponent<PlayerStats>().CurrentHealth.Value / TeamObj[i].GetComponent<PlayerStats>().maxHealth.Value;
                     CharacterXP.value = TeamObj[i].GetComponent<PlayerStats>().CurrentXp.Value / TeamObj[i].GetComponent<PlayerStats>().RequiredXp.Value;
                     //CharName.text = TeamObj[i].GetComponent<PlayerStats>().characterName.Value.ToString();
