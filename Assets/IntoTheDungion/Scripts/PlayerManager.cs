@@ -28,8 +28,6 @@ public class PlayerManager : MonoBehaviour
 
         PlayerJoining.name = ("Player " + Players.Count.ToString());
 
-        Debug.Log(PlayerJoining.name);
-
         if (PlayerJoining.GetComponent<PlayerStats>().HealthUI)
         {
             Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());

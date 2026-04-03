@@ -54,7 +54,6 @@ public class PlayerMovement : NetworkBehaviour
     public void Looking()
     {
         Ray raytest = Camera.main.ScreenPointToRay(new Vector3(m_LookAmt.x, m_LookAmt.y));
-        //Ray raytest = Camera.main.ScreenPointToRay(Mouse.current.position.value);
 
         RaycastHit rayinfo;
 
@@ -62,6 +61,20 @@ public class PlayerMovement : NetworkBehaviour
         {
             hitPosition = rayinfo.point;
             Debug.DrawLine(hitPosition, hitPosition + new Vector3(0, 3, 0));
+
+            //sets the targetted player
+            if (this.GetComponent<PlayerStats>().TryingToLock)
+            {
+                if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
+                {
+                    this.GetComponent<PlayerStats>().Targeting = rayinfo.collider.gameObject;
+                    this.GetComponent<PlayerStats>().TryingToLock = false;
+                }
+                else
+                {
+                    this.GetComponent<PlayerStats>().TryingToLock = false;
+                }
+            }
         }
 
         Vector3 rotation = hitPosition - transform.position;

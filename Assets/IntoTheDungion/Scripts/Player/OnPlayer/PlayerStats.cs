@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Collections;
+using Unity.VisualScripting;
 
 
 public enum AbilityState
@@ -45,6 +46,8 @@ public class PlayerStats : NetworkBehaviour
     public int primaryDamage;
     private bool AbleToAttack = true;
 
+    public bool TryingToLock;
+    public GameObject Targeting;
     public List<GameObject> Attackable;
 
     public bool AbleToMove = true;
@@ -111,46 +114,78 @@ public class PlayerStats : NetworkBehaviour
     private void Update()
     {
         CheckAbilities();
+
+        if (AbleToAttack && Targeting != null)
+        {
+            StartCoroutine(PrimaryAttack());
+        }
     }
 
-    public void DealDamage(InputAction.CallbackContext context)
+    public void LockOn(InputAction.CallbackContext context)
     {
-        for (int i = 0; i < Attackable.Count; i++)
+        TryingToLock = true;
+    }
+    public void RepeatTarget(GameObject playerTotarget)
+    {
+        bool Abletosee = false;
+
+        RaycastHit rayinfo;
+
+        /* test ui
+        Vector3 rotation = Targeting.transform.position - transform.position;
+
+        float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, rotY, 0);
+
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 17f, 0), new Vector3(0, rotY, 0), out rayinfo, Vector3.Distance(this.transform.position, Targeting.transform.position) + 3f))
         {
-            if (Attackable[i].transform.GetComponent<BaseEnemy>())
+            Debug.DrawLine(this.transform.position, Targeting.transform.position);
+            Debug.Log(rayinfo.collider.name);
+
+            if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
             {
-                if (AbleToAttack)
+                Debug.Log("Working");
+                if (rayinfo.collider.gameObject == Targeting.gameObject)
                 {
-                    Attackable[i].transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage);
-
-                    /* Soul Focus
-                    if (focusAmount + focusOnHit >= MaxFocus)
-                    {
-                        focusAmount = MaxFocus;
-                    }
-                    else
-                    {
-                        focusAmount += focusOnHit;
-                    }
-
-                    if (focusAmount >= FocusTaken)
-                    {
-                        AbilityReady = true;
-                    }
-                    PlayerManager.instance.LoadFocus();
-                    */
-
-                    //Reset Attacks
-                    AbleToAttack = false;
-                    StartCoroutine(WaitAttack());
+                    Debug.Log("Hitting target");
+                    Abletosee = true;
                 }
-            }
-            else if(1 > 0)
-            {
 
+                Debug.Log(Abletosee);
             }
         }
+        */
+        Abletosee = true;
 
+
+        /*
+        if (Physics.Raycast(this.transform.position, Targeting.transform.position, out rayinfo))
+        {
+            if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
+            {
+                if (rayinfo.collider.gameObject == Targeting.gameObject)
+                {
+                    Abletosee = true;
+                }
+
+                Debug.Log(Abletosee);
+                Debug.DrawLine(this.transform.position, Targeting.transform.position);
+            }
+        }
+        */
+
+        if (Abletosee)
+        {
+            Debug.Log("in line of Sight");
+            if (playerTotarget.transform.GetComponent<BaseEnemy>())
+            {
+                playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage);
+            }
+            else if (playerTotarget.transform.GetComponent<PlayerStats>())
+            {
+                playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
+            }
+        }
         //StartCoroutine(AttackAn());
     }
 
@@ -374,11 +409,13 @@ public class PlayerStats : NetworkBehaviour
 
         //ableToInteract = true;
     }
-    IEnumerator WaitAttack()
+    IEnumerator PrimaryAttack()
     {
-        yield return new WaitForSeconds(.3f);
-
+        AbleToAttack = false;
+        RepeatTarget(Targeting);
+        yield return new WaitForSeconds(2f);
         AbleToAttack = true;
+
     }
     IEnumerator DeathCo()
     {
