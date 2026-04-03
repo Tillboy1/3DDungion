@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class TeamHealthUI : MonoBehaviour
 {
@@ -46,29 +47,29 @@ public class TeamHealthUI : MonoBehaviour
             //TeamObj.Clear();
         }
 
-        Debug.Log(PlayerManager.instance.Players.Count + "count " + "shti");
+        //Debug.Log(PlayerManager.instance.Players.Count + " count");
 
         List<GameObject> tempGO = new List<GameObject>();
         for (int i = 0; i < PlayerManager.instance.Players.Count; i++)
         {
-            Debug.Log(PlayerManager.instance.Players[i].gameObject.name);
-            
             if (PlayerManager.instance.Players[i] != PlayerObj)
             {
-                Debug.Log("Addingobj");
+                //Debug.Log("adding");
                 tempGO.Add(PlayerManager.instance.Players[i]);
             }
             else
             {
-                Debug.Log("PlayerObj");
+                //Debug.Log("not added");
             }
         }
 
         for (int i = 0; i < tempGO.Count; i++)
         {
-            Debug.Log("test " + i);
+            //Debug.Log("test " + i);
             TeamObj.Add(tempGO[i]);
         }
+
+        //Debug.Log("END OF GROUP");
     }
 
     public void UpdateStats()
@@ -159,7 +160,7 @@ public class TeamHealthUI : MonoBehaviour
                         }
                         else if (Childs.gameObject.name == "Level Text")
                         {
-                            Debug.Log("well this was a good idea " + Childs.gameObject);
+                            //Debug.Log("well this was a good idea " + Childs.gameObject);
                             CharLevel = Childs.gameObject.GetComponent<TMP_Text>();
                         }
                     }

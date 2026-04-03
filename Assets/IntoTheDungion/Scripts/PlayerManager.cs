@@ -4,10 +4,9 @@ using Unity.Netcode;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public static PlayerManager instance;
-
     public List<GameObject> Players;
 
     public void Awake()
@@ -30,7 +29,6 @@ public class PlayerManager : MonoBehaviour
 
         if (PlayerJoining.GetComponent<PlayerStats>().HealthUI)
         {
-            Debug.Log(PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>());
             PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
         }
     }

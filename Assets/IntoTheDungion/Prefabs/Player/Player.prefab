@@ -581,6 +581,8 @@ MonoBehaviour:
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 15
   interacting: 0
+  primaryAttack: 1
+  primaryHeals: 0
   primaryDamage: 10
   TryingToLock: 0
   Targeting: {fileID: 0}

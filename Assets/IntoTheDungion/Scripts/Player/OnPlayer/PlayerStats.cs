@@ -43,6 +43,9 @@ public class PlayerStats : NetworkBehaviour
     //private bool ableToInteract = true;
 
     [Header("Combat")]
+    public bool primaryAttack;
+    public bool primaryHeals;
+
     public int primaryDamage;
     private bool AbleToAttack = true;
 
@@ -115,7 +118,7 @@ public class PlayerStats : NetworkBehaviour
     {
         CheckAbilities();
 
-        if (AbleToAttack && Targeting != null)
+        if (AbleToAttack && primaryAttack && Targeting != null)
         {
             StartCoroutine(PrimaryAttack());
         }
@@ -177,11 +180,11 @@ public class PlayerStats : NetworkBehaviour
         if (Abletosee)
         {
             Debug.Log("in line of Sight");
-            if (playerTotarget.transform.GetComponent<BaseEnemy>())
+            if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals)
             {
                 playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage);
             }
-            else if (playerTotarget.transform.GetComponent<PlayerStats>())
+            else if (playerTotarget.transform.GetComponent<PlayerStats>() && primaryHeals)
             {
                 playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
             }
