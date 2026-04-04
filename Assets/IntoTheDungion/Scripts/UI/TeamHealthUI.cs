@@ -117,7 +117,6 @@ public class TeamHealthUI : MonoBehaviour
     }
     public void UpdateTeamStats()
     {
-
         Image PlayerSprite = null;
 
         Slider CharacterHealth = null;

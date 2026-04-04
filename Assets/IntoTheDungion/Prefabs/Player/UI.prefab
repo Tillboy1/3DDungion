@@ -900,8 +900,9 @@ GameObject:
   - component: {fileID: 7145718846347088163}
   - component: {fileID: 8351350737939398557}
   - component: {fileID: 505961168157560010}
+  - component: {fileID: 4822281486618384563}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Ally UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -969,6 +970,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4822281486618384563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600325959626447359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6d4c48c6312b54783ae81247c3b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  Player: {fileID: 0}
 --- !u!1 &604852938883010954
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,6 +6786,7 @@ GameObject:
   - component: {fileID: 5968254013272631019}
   - component: {fileID: 2552054806691517187}
   - component: {fileID: 129607298420459146}
+  - component: {fileID: 6276898467282892991}
   m_Layer: 5
   m_Name: Players STATS
   m_TagString: Untagged
@@ -6836,7 +6851,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2881256074050364206}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d96deaf323aee5d42bbc6bfe77c3eb36, type: 3}
   m_Name: 
@@ -6849,6 +6864,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &6276898467282892991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2881256074050364206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bf416285ee62641974d759283114e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &2908179428250396421
 GameObject:
   m_ObjectHideFlags: 0
@@ -10678,8 +10705,9 @@ GameObject:
   - component: {fileID: 8603200954887802399}
   - component: {fileID: 2193558560491914802}
   - component: {fileID: 6537066479529504106}
+  - component: {fileID: 6370767832805259118}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Ally UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10747,6 +10775,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6370767832805259118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4255138385748089883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6d4c48c6312b54783ae81247c3b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  Player: {fileID: 0}
 --- !u!1 &4295785744254507390
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,8 +11511,9 @@ GameObject:
   - component: {fileID: 9160078682045566964}
   - component: {fileID: 4001992350436117474}
   - component: {fileID: 6886651219407680293}
+  - component: {fileID: 3911395780895528421}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Ally UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11539,6 +11581,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3911395780895528421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449538894027343762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6d4c48c6312b54783ae81247c3b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  Player: {fileID: 0}
 --- !u!1 &4457304427247387483
 GameObject:
   m_ObjectHideFlags: 0
@@ -12338,8 +12393,9 @@ GameObject:
   - component: {fileID: 210053261288068757}
   - component: {fileID: 18964202799820123}
   - component: {fileID: 6592397425209826051}
+  - component: {fileID: 6169155495321838621}
   m_Layer: 5
-  m_Name: Current Player
+  m_Name: Play UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12407,6 +12463,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6169155495321838621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681729502054542906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6d4c48c6312b54783ae81247c3b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  Player: {fileID: 0}
 --- !u!1 &4688034171902430144
 GameObject:
   m_ObjectHideFlags: 0
@@ -22893,8 +22962,9 @@ GameObject:
   - component: {fileID: 2706867286591537149}
   - component: {fileID: 6330524669187370478}
   - component: {fileID: 4952238972873960038}
+  - component: {fileID: 258520907136308649}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Ally UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22962,6 +23032,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &258520907136308649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8833350698601985718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6d4c48c6312b54783ae81247c3b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  Player: {fileID: 0}
 --- !u!1 &8841733459806297056
 GameObject:
   m_ObjectHideFlags: 0
