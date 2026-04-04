@@ -1,11 +1,18 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Dash", menuName = "Scriptable Objects/DPS/Dash")]
 public class Dash : AbilitiesBase
 {
+    public float DashForce;
+    public float DashForceUpward;
+    
+
     public override void Activate(GameObject player)
     {
         Debug.Log("Dashing");
-        player.GetComponent<Rigidbody>().linearVelocity = new Vector3(player.GetComponent<PlayerMovement>().MouseLocation.x - player.transform.position.x, 0, player.GetComponent<PlayerMovement>().MouseLocation.y - player.transform.position.y);
+        Vector3 forceToApply = player.GetComponent<Transform>().right * DashForce + player.GetComponent<Transform>().up * DashForceUpward;
+        player.GetComponent<Rigidbody>().AddForce(forceToApply, ForceMode.Impulse);
     }
 }

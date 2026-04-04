@@ -42,6 +42,17 @@ public class PlayerStats : NetworkBehaviour
     public bool interacting;
     //private bool ableToInteract = true;
 
+    [Header("Stats")]
+    public NetworkVariable<int> StrengthStat = new NetworkVariable<int>(0);
+    public NetworkVariable<int> DexterityStat = new NetworkVariable<int>(0);
+    public NetworkVariable<int> ConstatutionStat = new NetworkVariable<int>(0);
+    public NetworkVariable<int> IntelligenceStat = new NetworkVariable<int>(0);
+    public NetworkVariable<int> WisdomStat = new NetworkVariable<int>(0);
+    public NetworkVariable<int> CharismaStat = new NetworkVariable<int>(0);
+
+    public int ClassStatsRemaining;
+    public int ModifierStatsRemaining;
+
     [Header("Combat")]
     public bool primaryAttack;
     public bool primaryHeals;

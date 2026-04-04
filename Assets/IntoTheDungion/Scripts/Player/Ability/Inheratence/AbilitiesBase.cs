@@ -24,16 +24,18 @@ public class AbilitiesBase : ScriptableObject
     public int CurrentEX;
     public int EXPToLevel = 1;
     public int[] EXPDifficulties;
+    public int[] LvlAddition;
 
     public virtual void Activate(GameObject Player) {}
 
-    public void AbilityRegiven()
+    public void AbilityAddXP()
     {
         if (CurrentLevel != MaxLevel)
         {
             if (EXPToLevel == CurrentEX++)
             {
                 CurrentEX = 0;
+                CurrentLevel++;
 
                 // increases the xp required
                 for(int i = 0; i < EXPDifficulties.Length; i++)
@@ -43,7 +45,6 @@ public class AbilitiesBase : ScriptableObject
                         EXPToLevel++;
                     }
                 }
-                CurrentLevel++;
             }
         }
     }

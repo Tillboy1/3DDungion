@@ -18,11 +18,12 @@ MonoBehaviour:
   CastingTime: 0.5
   RefreshTime: 10
   AbilityState: 0
-  RemainingCasting: 0
+  RemainingCasting: -0.00927285
   RemainingRefresh: 0
   CurrentLevel: 1
   MaxLevel: 10
   CurrentEX: 0
   EXPToLevel: 1
   EXPDifficulties: 03000000050000000700000009000000
+  LvlAddition: 
   HealthGained: 3

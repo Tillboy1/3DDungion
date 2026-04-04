@@ -8,6 +8,6 @@ public class AbilitySecondWind : AbilitiesBase
 
     public override void Activate(GameObject player)
     {
-        player.GetComponent<PlayerStats>().BaseHeal(HealthGained);
+        player.GetComponent<PlayerStats>().BaseHeal(HealthGained + (2 * CurrentLevel));
     }
 }
