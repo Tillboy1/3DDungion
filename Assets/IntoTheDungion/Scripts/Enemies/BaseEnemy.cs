@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public enum AttackDirection
@@ -34,7 +35,7 @@ public class BaseEnemy : MonoBehaviour
     //public anim holds the animator
 
     [Header("health")]
-    public int currentHealth;
+    public NetworkVariable<int> currentHealth;
     public int maxHealth;
     public bool Sheild;
 
@@ -82,14 +83,14 @@ public class BaseEnemy : MonoBehaviour
 
     public virtual void TakeDamage(int Damage)
     {
-        if (currentHealth - Damage <= 0)
+        if (currentHealth.Value - Damage <= 0)
         {
-            currentHealth -= Damage;
+            currentHealth.Value -= Damage;
             Die();
         }
         else
         {
-            currentHealth -= Damage;
+            currentHealth.Value -= Damage;
         }
     }
 
@@ -123,7 +124,7 @@ public class Attacklist
         Id = enemy.id;
         ImageSprite = enemy.EnemySprite;
 
-        healthCurrent = enemy.currentHealth;
+        healthCurrent = enemy.currentHealth.Value;
         healthMax = enemy.maxHealth;
         Sheild = enemy.Sheild;
 

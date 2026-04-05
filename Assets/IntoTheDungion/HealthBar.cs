@@ -44,13 +44,10 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Update");
         SetInfo();
     }
     public void SetInfo()
     {
-        Debug.Log(Player.CurrentHealth.Value / Player.maxHealth.Value + "=" + Player.CurrentHealth.Value + "/" + Player.maxHealth.Value);
-
         CharacterHealth.value = Player.CurrentHealth.Value / Player.maxHealth.Value;
         CharacterXP.value = Player.CurrentXp.Value / Player.RequiredXp.Value;
         //CharName.text = Player.gameObject.name;

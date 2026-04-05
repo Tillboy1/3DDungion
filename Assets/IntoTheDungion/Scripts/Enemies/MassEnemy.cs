@@ -4,11 +4,11 @@ public class MassEnemy : BaseEnemy
 {
     private void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth.Value = maxHealth;
     }
     public virtual void Respawn()
     {
-        currentHealth = maxHealth;
+        currentHealth.Value = maxHealth;
         this.gameObject.SetActive(true);
     }
 }
