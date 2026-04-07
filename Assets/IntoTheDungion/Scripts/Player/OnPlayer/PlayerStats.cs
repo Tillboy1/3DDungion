@@ -114,7 +114,7 @@ public class PlayerStats : NetworkBehaviour
 
             Menu.GetComponentInChildren<TeamHealthUI>().PlayerObj = this.gameObject;
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
-            CharacterSheet.GetComponent<CharacterSheet>().Player = this.gameObject;
+            CharacterSheet.GetComponent<CharacterSheet>().Player = this;
         }
         PlayerManager.instance.PlayerJoined(this.gameObject);
     }

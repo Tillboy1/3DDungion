@@ -10,11 +10,13 @@ public class AbilitiesBase : ScriptableObject
 
     [Header("Casting")]
     public float CastingTime;
+    public float DurationTime;
     public float RefreshTime;
 
     public AbilityState AbilityState;
 
     public float RemainingCasting;
+    public float RemainingDuration;
     public float RemainingRefresh;
 
     [Header("Leveling UP")]
