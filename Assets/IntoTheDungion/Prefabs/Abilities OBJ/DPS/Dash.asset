@@ -15,10 +15,13 @@ MonoBehaviour:
   Name: Dash
   Description: Allows the user to move out of the way of attacks
   ClassRequired: DPS
+  sprite: {fileID: 21300000, guid: be085070c5c628b48952bced9680f207, type: 3}
   CastingTime: 0
+  DurationTime: 0
   RefreshTime: 5
   AbilityState: 0
   RemainingCasting: 0
+  RemainingDuration: 0
   RemainingRefresh: 0
   CurrentLevel: 1
   MaxLevel: 10

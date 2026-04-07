@@ -5,13 +5,14 @@ using UnityEngine;
 public class AOEHitArea : MonoBehaviour
 {
     [Header("Base Requirements")]
-    public GameObject Caller;
+    public GameObject Creater;
     public Collider collid;
     public List<GameObject> ObjectsinArea;
 
     public float TimeToDestroy;
     public bool AbleToLeave;
     public float ScaleAmount;
+    public bool isavbe;
 
     private void Start()
     {
@@ -47,7 +48,9 @@ public class AOEHitArea : MonoBehaviour
 
     IEnumerator startedCountdown()
     {
-        yield return new WaitForSeconds(TimeToDestroy + 0.01f);
+        yield return new WaitForSeconds(TimeToDestroy);
+        Returninfo();
+        yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
     }
 }

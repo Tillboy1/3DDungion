@@ -7,6 +7,7 @@ public class AbilitiesBase : ScriptableObject
     public string Name;
     public string Description;
     public string ClassRequired;
+    public Sprite sprite;
 
     [Header("Casting")]
     public float CastingTime;

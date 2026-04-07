@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -168,7 +168,9 @@ public class CharacterSheet : MonoBehaviour
         else
         {
             Player.ActiveAbilities[SlectedAbilitySlot] = SlectedAbility;
+            Player.Abilities.Remove(SlectedAbility);
         }
+        ShowAbilities();
     }
 
     public void ShowAbilities()
@@ -178,7 +180,7 @@ public class CharacterSheet : MonoBehaviour
         {
             if (Player.ActiveAbilities[i] != null)
             {
-                Debug.Log("Change" + AbilityIcons[i].name + "'s Sprite");
+                AbilityIcons[i].GetComponent<Image>().sprite = Player.ActiveAbilities[i].sprite;
             }
         }
 
