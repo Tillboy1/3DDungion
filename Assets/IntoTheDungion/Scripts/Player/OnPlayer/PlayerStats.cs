@@ -10,16 +10,16 @@ using Unity.VisualScripting;
 public enum AbilityState
 {
     Ready,
-    Active,
+    Casting,
+    Undergoing,
     Cooldown
 }
-[GenerateSerializationForTypeAttribute(typeof(string))]
 public class PlayerStats : NetworkBehaviour
 {
     private GameObject TestSpawnLocation;
     public Vector2 lastRestLocation;
 
-    public NetworkVariable<FixedString64Bytes> characterName;
+    public string characterName;
 
     [Header("UI")]
     public bool UIOpen;
@@ -33,6 +33,8 @@ public class PlayerStats : NetworkBehaviour
     [Header("Health")]
     public NetworkVariable<float> CurrentHealth;
     public NetworkVariable<float> maxHealth;
+    public NetworkVariable<float> ArmourCurrent;
+    public NetworkVariable<float> ArmourTotal;
     public NetworkVariable<float> Sheild;
 
     //public float CurrentHealth;
@@ -144,9 +146,9 @@ public class PlayerStats : NetworkBehaviour
     {
         bool Abletosee = false;
 
-        RaycastHit rayinfo;
-
         /* test ui
+         RaycastHit rayinfo;
+
         Vector3 rotation = Targeting.transform.position - transform.position;
 
         float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
@@ -216,7 +218,7 @@ public class PlayerStats : NetworkBehaviour
                     case AbilityState.Ready:
                         // Done with input actions
                         break;
-                    case AbilityState.Active:
+                    case AbilityState.Casting:
                         isCasting = true;
                         if (ActiveAbilities[i].RemainingCasting > 0)
                         {
@@ -225,7 +227,19 @@ public class PlayerStats : NetworkBehaviour
                         else
                         {
                             ActiveAbilities[i].Activate(this.gameObject);
+                            ActiveAbilities[i].RemainingDuration = ActiveAbilities[i].DurationTime;
+                            ActiveAbilities[i].AbilityState = AbilityState.Undergoing;
+                        }
+                        break;
+                    case AbilityState.Undergoing:
+                        if (ActiveAbilities[i].RemainingDuration > 0)
+                        {
+                            ActiveAbilities[i].RemainingDuration -= Time.deltaTime;
+                        }
+                        else
+                        {
                             isCasting = false;
+                            ActiveAbilities[i].RemainingRefresh = ActiveAbilities[i].RefreshTime;
                             ActiveAbilities[i].AbilityState = AbilityState.Cooldown;
                         }
                         break;
@@ -250,7 +264,7 @@ public class PlayerStats : NetworkBehaviour
         {
             Debug.Log("Ability Used");
 
-            ActiveAbilities[0].AbilityState = AbilityState.Active;
+            ActiveAbilities[0].AbilityState = AbilityState.Casting;
             ActiveAbilities[0].RemainingCasting = ActiveAbilities[0].CastingTime;
         }
     }
@@ -259,7 +273,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[1].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[1].AbilityState = AbilityState.Active;
+            ActiveAbilities[1].AbilityState = AbilityState.Casting;
             ActiveAbilities[1].RemainingCasting = ActiveAbilities[1].CastingTime;
         }
     }
@@ -268,7 +282,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[2].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[2].AbilityState = AbilityState.Active;
+            ActiveAbilities[2].AbilityState = AbilityState.Casting;
             ActiveAbilities[2].RemainingCasting = ActiveAbilities[2].CastingTime;
         }
     }
@@ -277,7 +291,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[3].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[3].AbilityState = AbilityState.Active;
+            ActiveAbilities[3].AbilityState = AbilityState.Casting;
             ActiveAbilities[3].RemainingCasting = ActiveAbilities[3].CastingTime;
         }
     }
@@ -286,7 +300,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[4].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[4].AbilityState = AbilityState.Active;
+            ActiveAbilities[4].AbilityState = AbilityState.Casting;
             ActiveAbilities[4].RemainingCasting = ActiveAbilities[4].CastingTime;
         }
     }
@@ -295,7 +309,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[5].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[5].AbilityState = AbilityState.Active;
+            ActiveAbilities[5].AbilityState = AbilityState.Casting;
             ActiveAbilities[5].RemainingCasting = ActiveAbilities[5].CastingTime;
         }
     }
@@ -304,7 +318,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[6].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[6].AbilityState = AbilityState.Active;
+            ActiveAbilities[6].AbilityState = AbilityState.Casting;
             ActiveAbilities[6].RemainingCasting = ActiveAbilities[6].CastingTime;
         }
     }
@@ -313,7 +327,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[7].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[7].AbilityState = AbilityState.Active;
+            ActiveAbilities[7].AbilityState = AbilityState.Casting;
             ActiveAbilities[7].RemainingCasting = ActiveAbilities[7].CastingTime;
         }
     }
@@ -322,7 +336,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[8].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[8].AbilityState = AbilityState.Active;
+            ActiveAbilities[8].AbilityState = AbilityState.Casting;
             ActiveAbilities[8].RemainingCasting = ActiveAbilities[8].CastingTime;
         }
     }
@@ -331,7 +345,7 @@ public class PlayerStats : NetworkBehaviour
         if (ActiveAbilities[9].AbilityState == AbilityState.Ready && !isCasting)
         {
             Debug.Log("Ability Used");
-            ActiveAbilities[9].AbilityState = AbilityState.Active;
+            ActiveAbilities[9].AbilityState = AbilityState.Casting;
             ActiveAbilities[9].RemainingCasting = ActiveAbilities[9].CastingTime;
         }
     }

@@ -10,6 +10,9 @@ public class HealthBar : MonoBehaviour
     public Image PlayerSprite = null;
 
     public Slider CharacterHealth = null;
+    public Slider CharacterArmour = null;
+    public Slider CharacterSheild = null;
+
     public Slider CharacterXP = null;
 
     public TMP_Text CharName = null;
@@ -26,6 +29,14 @@ public class HealthBar : MonoBehaviour
             else if (Childs.gameObject.name == "Health Slider")
             {
                 CharacterHealth = Childs.gameObject.GetComponent<Slider>();
+            }
+            else if (Childs.gameObject.name == "Armour Slider")
+            {
+                CharacterArmour = Childs.gameObject.GetComponent<Slider>();
+            }
+            else if (Childs.gameObject.name == "Sheild Slider")
+            {
+                CharacterSheild = Childs.gameObject.GetComponent<Slider>();
             }
             else if (Childs.gameObject.name == "XP Slider")
             {
@@ -48,7 +59,11 @@ public class HealthBar : MonoBehaviour
     }
     public void SetInfo()
     {
-        CharacterHealth.value = Player.CurrentHealth.Value / Player.maxHealth.Value;
+        float maxCombined = (Player.maxHealth.Value + Player.ArmourTotal.Value + Player.Sheild.Value);
+        CharacterHealth.value = Player.CurrentHealth.Value / maxCombined;
+        CharacterArmour.value = (Player.CurrentHealth.Value + Player.ArmourCurrent.Value) / maxCombined;
+        CharacterSheild.value = (Player.CurrentHealth.Value + Player.ArmourCurrent.Value + Player.Sheild.Value) / maxCombined;
+
         CharacterXP.value = Player.CurrentXp.Value / Player.RequiredXp.Value;
         //CharName.text = Player.gameObject.name;
         CharLevel.text = Player.CurrentLevel.Value.ToString();

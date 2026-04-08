@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77e43159712560409f3500041837632, type: 3}
+  m_Name: Sheild
+  m_EditorClassIdentifier: Assembly-CSharp::Sheild
+  Name: Sheild
+  Description: Cast a sheild to remove damage
+  ClassRequired: Tank
+  sprite: {fileID: 21300000, guid: 383c58bd840b6bf44b9785cd85d302ab, type: 3}
+  CastingTime: 2
+  DurationTime: 0
+  RefreshTime: 15
+  AbilityState: 0
+  RemainingCasting: -0.0014425004
+  RemainingDuration: 0
+  RemainingRefresh: 0
+  CurrentLevel: 1
+  MaxLevel: 10
+  CurrentEX: 0
+  EXPToLevel: 1
+  EXPDifficulties: 0400000007000000
+  LvlAddition: 0300000007000000
+  ShildAmount: 100

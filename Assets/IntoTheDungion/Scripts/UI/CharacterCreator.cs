@@ -5,8 +5,14 @@ public class CharacterCreator : MonoBehaviour
 {
     public GameObject player;
 
+    private string nameholder;
     private int ClassSelected;
     public AbilitiesBase[] StartingAbilities;
+
+    public void CharacterName(string name)
+    {
+        nameholder = name;
+    }
     public void ClassChoice(int Class)
     {
         switch (Class)
@@ -25,11 +31,18 @@ public class CharacterCreator : MonoBehaviour
     public void CompleateAccount()
     {
         PlayerStats stats = player.GetComponent<PlayerStats>();
+
+        if (nameholder != null)
+        {
+            stats.characterName = nameholder;
+        }
+        
+
+        //Class Selection
         if (ClassSelected <= 0)
         {
             stats.maxHealth.Value = 400;
             stats.CurrentHealth.Value = stats.maxHealth.Value;
-            stats.Sheild.Value = 100;
 
             stats.primaryAttack = true;
             stats.primaryHeals = false;
@@ -41,7 +54,6 @@ public class CharacterCreator : MonoBehaviour
         {
             stats.maxHealth.Value = 200;
             stats.CurrentHealth.Value = stats.maxHealth.Value;
-            stats.Sheild.Value = 25;
 
             stats.primaryAttack = false;
             stats.primaryHeals = true;
@@ -53,7 +65,6 @@ public class CharacterCreator : MonoBehaviour
         {
             stats.maxHealth.Value = 150;
             stats.CurrentHealth.Value = stats.maxHealth.Value;
-            stats.Sheild.Value = 0;
 
             stats.primaryAttack = true;
             stats.primaryHeals = true;

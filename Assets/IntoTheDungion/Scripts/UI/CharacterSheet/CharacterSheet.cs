@@ -207,6 +207,11 @@ public class CharacterSheet : MonoBehaviour
             }
         }
 
+        foreach (Transform item in AbilitySlots.transform)
+        {
+            Destroy(item.gameObject);
+        }
+
         // Non active abilities
         for (int i = 0; i < Player.Abilities.Count; i++)
         {
