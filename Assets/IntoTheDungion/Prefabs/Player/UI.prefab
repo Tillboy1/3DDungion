@@ -9307,7 +9307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4093897087619800262
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13836,8 +13836,24 @@ MonoBehaviour:
   player: {fileID: 0}
   StartingAbilities:
   - {fileID: 11400000, guid: be9621321452c14499965a298f136d10, type: 2}
-  - {fileID: 11400000, guid: 76def59e8f891884e8c615b9fc54abcf, type: 2}
   - {fileID: 11400000, guid: 2cbfb2ec498e58948bffe95dc605a9d6, type: 2}
+  StartingWeapons:
+  - {fileID: 11400000, guid: 8f542470c93b63449be4c3153776b7e5, type: 2}
+  - {fileID: 11400000, guid: 26c99ca9d22c7be48b21288bd01f142e, type: 2}
+  - {fileID: 11400000, guid: c9351ea119345c44e8e768b6c46f2b50, type: 2}
+  StartingArmour:
+  - {fileID: 11400000, guid: d6940e160952e6a40a11ba4512d0187c, type: 2}
+  - {fileID: 11400000, guid: 4ea5c09018dc5fc429f3f89cd7078117, type: 2}
+  - {fileID: 11400000, guid: 72ea40f8e8004cb45a01d7bd7a838879, type: 2}
+  - {fileID: 11400000, guid: 09911558b2685c6438b58c182d745704, type: 2}
+  - {fileID: 11400000, guid: 1654d1ff455affd47b4c51a36ddd6e01, type: 2}
+  - {fileID: 11400000, guid: 314889a77b072064ca4d31e6a5305339, type: 2}
+  - {fileID: 11400000, guid: 03b0997981bbef849a556407aefcfab5, type: 2}
+  - {fileID: 11400000, guid: 22e97cd15a96a994b96224abd9353d40, type: 2}
+  - {fileID: 11400000, guid: efb35da8066978940a79f4a19f2944f0, type: 2}
+  - {fileID: 11400000, guid: 7f133537521587946b337208eef7e0bf, type: 2}
+  - {fileID: 11400000, guid: 8f3868b65b8e1a347a505d7af1dbffd9, type: 2}
+  - {fileID: 11400000, guid: c256b63374bec55488a6bf2398f62159, type: 2}
 --- !u!1 &4354265506568458913
 GameObject:
   m_ObjectHideFlags: 0
@@ -26431,7 +26447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5514487693305049117
 Transform:
   m_ObjectHideFlags: 0

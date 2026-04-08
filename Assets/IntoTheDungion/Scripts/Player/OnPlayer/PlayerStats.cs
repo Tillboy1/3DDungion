@@ -59,6 +59,10 @@ public class PlayerStats : NetworkBehaviour
     public bool primaryAttack;
     public bool primaryHeals;
 
+    public WeaponBase CurrentWeapon;
+    public WeaponBase BackUpWeapon;
+    public List<WeaponBase> OwnedWeapons;
+
     public int primaryDamage;
     private bool AbleToAttack = true;
 
@@ -69,6 +73,13 @@ public class PlayerStats : NetworkBehaviour
     public bool AbleToMove = true;
     public bool currentlyDead = false;
     public bool IsResting;
+
+    [Header("Armour")]
+    public HelmetBase CurrentHelmet;
+    public ChestplateBase CurrentChestplate;
+    public LegsBase CurrentLegs;
+    public FeetBase CurrentFeet;
+    public List<ArmourBase> OwnedArmour;
 
     [Header("Leveling")]
     public NetworkVariable<int> CurrentLevel;
@@ -429,6 +440,15 @@ public class PlayerStats : NetworkBehaviour
         Debug.Log("Death Animation");
 
         StartCoroutine(DeathCo());
+    }
+    #endregion
+    #region Equipment
+    public void CheckEquipment()
+    {
+        ArmourTotal.Value = CurrentHelmet.ArmourBounus;
+        ArmourTotal.Value += CurrentChestplate.ArmourBounus;
+        ArmourTotal.Value += CurrentLegs.ArmourBounus;
+        ArmourTotal.Value += CurrentFeet.ArmourBounus;
     }
     #endregion
 

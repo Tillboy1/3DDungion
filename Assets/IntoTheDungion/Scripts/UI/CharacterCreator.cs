@@ -8,6 +8,8 @@ public class CharacterCreator : MonoBehaviour
     private string nameholder;
     private int ClassSelected;
     public AbilitiesBase[] StartingAbilities;
+    public WeaponBase[] StartingWeapons;
+    public ArmourBase[] StartingArmour;
 
     public void CharacterName(string name)
     {
@@ -49,6 +51,12 @@ public class CharacterCreator : MonoBehaviour
             stats.primaryDamage = 5;
 
             CheckStartingAbilities("Tank");
+            stats.CurrentWeapon = StartingWeapons[0];
+
+            stats.CurrentHelmet = (HelmetBase)StartingArmour[0];
+            stats.CurrentChestplate = (ChestplateBase)StartingArmour[1];
+            stats.CurrentLegs = (LegsBase)StartingArmour[2];
+            stats.CurrentFeet = (FeetBase)StartingArmour[3];
         }
         else if (ClassSelected == 1)
         {
@@ -60,6 +68,12 @@ public class CharacterCreator : MonoBehaviour
             stats.primaryDamage = 5;
 
             CheckStartingAbilities("DPS");
+            stats.CurrentWeapon = StartingWeapons[1];
+
+            stats.CurrentHelmet = (HelmetBase)StartingArmour[4];
+            stats.CurrentChestplate = (ChestplateBase)StartingArmour[5];
+            stats.CurrentLegs = (LegsBase)StartingArmour[6];
+            stats.CurrentFeet = (FeetBase)StartingArmour[7];
         }
         else if (ClassSelected == 2)
         {
@@ -71,6 +85,12 @@ public class CharacterCreator : MonoBehaviour
             stats.primaryDamage = 10;
 
             CheckStartingAbilities("Support");
+            stats.CurrentWeapon = StartingWeapons[2];
+
+            stats.CurrentHelmet = (HelmetBase)StartingArmour[8];
+            stats.CurrentChestplate = (ChestplateBase)StartingArmour[9];
+            stats.CurrentLegs = (LegsBase)StartingArmour[10];
+            stats.CurrentFeet = (FeetBase)StartingArmour[11];
         }
     }
 
