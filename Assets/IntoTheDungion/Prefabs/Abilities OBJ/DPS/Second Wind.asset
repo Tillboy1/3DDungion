@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbilitySecondWind
   Name: Second Wind
   Description: The ability to cause minor healing to yourself
-  ClassRequired: Fighter
+  ClassRequired: DPS
   sprite: {fileID: 21300000, guid: c31f65b961ee94646be53ff9f91d6c38, type: 3}
   CastingTime: 0.5
   DurationTime: 0

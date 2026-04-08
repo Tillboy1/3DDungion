@@ -57,9 +57,6 @@ public class CharacterSheet : MonoBehaviour
     public TMP_Text EquipmentNameText;
     public TMP_Text EquipmentDescriptionText;
     public TMP_Text EquipmentClassText;
-    public TMP_Text EquipmentactivateTimeText;
-    public TMP_Text EquipmentDurationTimeText;
-    public TMP_Text EquipmentRefreshTimeText;
 
     [Header("Skills")]
     //                                      Equipment
@@ -132,6 +129,32 @@ public class CharacterSheet : MonoBehaviour
             else if (objects.gameObject.name == "Equipment")
             {
                 EquipmentScreen = objects.gameObject;
+
+                foreach (Transform item in objects)
+                {
+                    if (item.name == "Equipment Screen")
+                    {
+
+                    }
+                    else if (item.name == "Ability Info")
+                    {
+                        foreach (Transform Slots in item)
+                        {
+                            if (Slots.gameObject.name == "Name Text (TMP)")
+                            {
+                                EquipmentNameText = Slots.GetComponent<TMP_Text>();
+                            }
+                            else if (Slots.gameObject.name == "Description Text (TMP)")
+                            {
+                                EquipmentDescriptionText = Slots.GetComponent<TMP_Text>();
+                            }
+                            else if (Slots.gameObject.name == "Class Text (TMP)")
+                            {
+                                EquipmentClassText = Slots.GetComponent<TMP_Text>();
+                            }
+                        }
+                    }
+                }
             }
             else if (objects.gameObject.name == "Skills")
             {

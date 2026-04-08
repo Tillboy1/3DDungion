@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 587204208
+  GlobalObjectIdHash: 3313230929
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -581,36 +581,12 @@ MonoBehaviour:
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 15
   interacting: 0
-  StrengthStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  DexterityStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  ConstatutionStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  IntelligenceStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  WisdomStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  CharismaStat:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
+  StrengthStat: 0
+  DexterityStat: 0
+  ConstatutionStat: 0
+  IntelligenceStat: 0
+  WisdomStat: 0
+  CharismaStat: 0
   ClassStatsRemaining: 0
   ModifierStatsRemaining: 0
   primaryAttack: 1
@@ -645,10 +621,9 @@ MonoBehaviour:
   - 2000
   - 2500
   isCasting: 0
-  Abilities:
-  - {fileID: 11400000, guid: be9621321452c14499965a298f136d10, type: 2}
+  Abilities: []
   ActiveAbilities:
-  - {fileID: 11400000, guid: b0eda754f07c7e449b1994cc5ecbd396, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

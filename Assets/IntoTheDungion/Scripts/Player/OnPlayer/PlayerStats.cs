@@ -43,12 +43,12 @@ public class PlayerStats : NetworkBehaviour
     //private bool ableToInteract = true;
 
     [Header("Stats")]
-    public NetworkVariable<int> StrengthStat = new NetworkVariable<int>(0);
-    public NetworkVariable<int> DexterityStat = new NetworkVariable<int>(0);
-    public NetworkVariable<int> ConstatutionStat = new NetworkVariable<int>(0);
-    public NetworkVariable<int> IntelligenceStat = new NetworkVariable<int>(0);
-    public NetworkVariable<int> WisdomStat = new NetworkVariable<int>(0);
-    public NetworkVariable<int> CharismaStat = new NetworkVariable<int>(0);
+    public int StrengthStat;
+    public int DexterityStat;
+    public int ConstatutionStat;
+    public int IntelligenceStat;
+    public int WisdomStat;
+    public int CharismaStat;
 
     public int ClassStatsRemaining;
     public int ModifierStatsRemaining;
@@ -115,6 +115,7 @@ public class PlayerStats : NetworkBehaviour
             Menu.GetComponentInChildren<TeamHealthUI>().PlayerObj = this.gameObject;
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
             CharacterSheet.GetComponent<CharacterSheet>().Player = this;
+            Menu.GetComponentInChildren<CharacterCreator>().player = this.gameObject;
         }
         PlayerManager.instance.PlayerJoined(this.gameObject);
     }
