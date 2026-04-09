@@ -23,9 +23,13 @@ public class CharacterSheet : MonoBehaviour
     public GameObject[] AbilityIcons = new GameObject[10];
     public GameObject AbilitySlots;
     public GameObject AbilityPrefab;
+    public GameObject WeaponPrefab;
+    public GameObject ArmourPrefab;
 
     public int SlectedAbilitySlot;
     public AbilitiesBase SlectedAbility;
+    public WeaponBase SlectedWeapon;
+    public ArmourBase SlectedArmour;
 
     public TMP_Text AbilityNameText;
     public TMP_Text AbilityDescriptionText;
@@ -232,7 +236,7 @@ public class CharacterSheet : MonoBehaviour
                             {
                                 EquipmentDescriptionText = Slots.GetComponent<TMP_Text>();
                             }
-                            else if (Slots.gameObject.name == "Class Text (TMP)")
+                            else if (Slots.gameObject.name == "Modifier Text (TMP)")
                             {
                                 EquipmentClassText = Slots.GetComponent<TMP_Text>();
                             }
@@ -245,7 +249,11 @@ public class CharacterSheet : MonoBehaviour
                 SkillsScreen = objects.gameObject;
             }
         }
+
+        //Sets All the UI
         ShowAbilities();
+        ShowWeapons();
+        ShowArmour();
     }
     public void SelectedAbilitySlot(int SlotNumber)
     {
@@ -262,9 +270,27 @@ public class CharacterSheet : MonoBehaviour
 
         SlectedAbility = AbilityTS;
     }
+    public void UpdateWeaponInfo(WeaponBase WeaponTS)
+    {
+        EquipmentNameText.text = WeaponTS.Name;
+        EquipmentDescriptionText.text = WeaponTS.Description;
+        //EquipmentClassText.text = WeaponTS.
+
+        SlectedWeapon = WeaponTS;
+        SlectedArmour = null;
+    }
+    public void UpdateArmourInfo(ArmourBase ArmourTS)
+    {
+        EquipmentNameText.text = ArmourTS.Name;
+        EquipmentDescriptionText.text = ArmourTS.Description;
+        //EquipmentClassText.text = WeaponTS.
+
+        SlectedWeapon = null;
+        SlectedArmour = ArmourTS;
+    }
     public void ChangeAbility()
     {
-        if(Player.ActiveAbilities[SlectedAbilitySlot] != null)
+        if (Player.ActiveAbilities[SlectedAbilitySlot] != null)
         {
             //switching out the abilities that are active
             Player.Abilities.Add(Player.ActiveAbilities[SlectedAbilitySlot]);
@@ -278,6 +304,100 @@ public class CharacterSheet : MonoBehaviour
             Player.Abilities.Remove(SlectedAbility);
         }
         ShowAbilities();
+    }
+    public void ChangeEquipment(int Slot)
+    {
+        if (SlectedWeapon != null)
+        {
+            if (Player.ActiveAbilities[SlectedAbilitySlot] != null)
+            {
+                //switching out the abilities that are active
+
+
+                Player.Abilities.Remove(SlectedAbility);
+                Player.ActiveAbilities[SlectedAbilitySlot] = SlectedAbility;
+            }
+            else
+            {
+                Player.Abilities.Remove(SlectedAbility);
+            }
+
+            if (Slot == 0)
+            {
+                Player.CurrentWeapon = SlectedWeapon;
+            }
+            else if (Slot == 1)
+            {
+                Player.BackUpWeapon = SlectedWeapon;
+            }
+
+            ShowWeapons();
+        }
+        else if (SlectedArmour != null)
+        {
+            if (SlectedArmour.GetComponent<HelmetBase>())
+            {
+                if (Player.CurrentHelmet != null)
+                {
+                    //switching out the armour that are active
+                    Player.OwnedArmour.Add(Player.CurrentHelmet);
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+                else
+                {
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+
+                Player.CurrentHelmet = SlectedArmour.GetComponent<HelmetBase>();
+            }
+            else if (SlectedArmour.GetComponent<ChestplateBase>())
+            {
+                if (Player.CurrentChestplate != null)
+                {
+                    //switching out the armour that are active
+                    Player.OwnedArmour.Add(Player.CurrentChestplate);
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+                else
+                {
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+
+                Player.CurrentChestplate = SlectedArmour.GetComponent<ChestplateBase>();
+            }
+            else if (SlectedArmour.GetComponent<LegsBase>())
+            {
+                if (Player.CurrentLegs != null)
+                {
+                    //switching out the armour that are active
+                    Player.OwnedArmour.Add(Player.CurrentLegs);
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+                else
+                {
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+
+                Player.CurrentLegs = SlectedArmour.GetComponent<LegsBase>();
+            }
+            else if (SlectedArmour.GetComponent<FeetBase>())
+            {
+                if (Player.CurrentFeet != null)
+                {
+                    //switching out the armour that are active
+                    Player.OwnedArmour.Add(Player.CurrentFeet);
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+                else
+                {
+                    Player.OwnedArmour.Remove(SlectedArmour);
+                }
+
+                Player.CurrentFeet = SlectedArmour.GetComponent<FeetBase>();
+            }
+
+            ShowArmour();
+        }
     }
 
     public void ShowAbilities()
@@ -302,6 +422,103 @@ public class CharacterSheet : MonoBehaviour
             var GO = Instantiate(AbilityPrefab, AbilitySlots.transform);
             GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
             GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+        }
+    }
+
+    public void ShowCurrentEquipment()
+    {
+
+    }
+    public void ShowWeapons()
+    {
+
+        foreach (Transform item in MeleeWeaponSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in RangedWeaponSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in ArcaneWeaponSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+
+        for (int i = 0; i < Player.OwnedWeapons.Count; i++)
+        {
+            Debug.Log("Got to show weapons " + Player.OwnedWeapons[i].name);
+
+            if (Player.OwnedWeapons[i].GetComponent<MeleeWeapon>())
+            {
+                var GO = Instantiate(WeaponPrefab, MeleeWeaponSection.transform);
+                GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
+                GO.GetComponent<WeaponHolder>().CharacterSheet = this;
+            }
+            else if (Player.OwnedWeapons[i].GetComponent<RangedWeapon>())
+            {
+                var GO = Instantiate(WeaponPrefab, RangedWeaponSection.transform);
+                GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
+                GO.GetComponent<WeaponHolder>().CharacterSheet = this;
+            }
+            else if (Player.OwnedWeapons[i].GetComponent<CasterWeapon>())
+            {
+                var GO = Instantiate(WeaponPrefab, ArcaneWeaponSection.transform);
+                GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
+                GO.GetComponent<WeaponHolder>().CharacterSheet = this;
+            }
+        }
+    }
+    public void ShowArmour()
+    {
+        //Removing all Old Armour
+        foreach (Transform item in HealmetArmourSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in ChestArmourSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in LegsArmourSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in FeetArmourSection.transform)
+        {
+            Destroy(item.gameObject);
+        }
+
+        Debug.Log("going to add " + Player.OwnedArmour.Count);
+
+        // Non active abilities
+        for (int i = 0; i < Player.OwnedArmour.Count; i++)
+        {
+            if (Player.OwnedArmour[i].GetComponent<HelmetBase>())
+            {
+                Debug.Log("It is a Helmet");
+                var GO = Instantiate(ArmourPrefab, HealmetArmourSection.transform);
+                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
+                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+            }
+            else if (Player.OwnedArmour[i].GetComponent<ChestplateBase>())
+            {
+                var GO = Instantiate(ArmourPrefab, ChestArmourSection.transform);
+                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
+                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+            }
+            else if (Player.OwnedArmour[i].GetComponent<LegsBase>())
+            {
+                var GO = Instantiate(ArmourPrefab, LegsArmourSection.transform);
+                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
+                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+            }
+            else if (Player.OwnedArmour[i].GetComponent<FeetBase>())
+            {
+                var GO = Instantiate(ArmourPrefab, FeetArmourSection.transform);
+                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
+                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+            }
         }
     }
 }

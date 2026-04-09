@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 587204208
+  GlobalObjectIdHash: 3313230929
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -532,7 +532,9 @@ MonoBehaviour:
   primaryHeals: 0
   CurrentWeapon: {fileID: 0}
   BackUpWeapon: {fileID: 0}
-  OwnedWeapons: []
+  OwnedWeapons:
+  - {fileID: 11400000, guid: 26c99ca9d22c7be48b21288bd01f142e, type: 2}
+  - {fileID: 11400000, guid: b42c97666b4e5ef478488e125620aec6, type: 2}
   primaryDamage: 10
   TryingToLock: 0
   Targeting: {fileID: 0}
@@ -544,7 +546,9 @@ MonoBehaviour:
   CurrentChestplate: {fileID: 0}
   CurrentLegs: {fileID: 0}
   CurrentFeet: {fileID: 0}
-  OwnedArmour: []
+  OwnedArmour:
+  - {fileID: 11400000, guid: efb35da8066978940a79f4a19f2944f0, type: 2}
+  - {fileID: 11400000, guid: 7f133537521587946b337208eef7e0bf, type: 2}
   CurrentLevel:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
