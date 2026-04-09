@@ -92,6 +92,8 @@ public class CharacterCreator : MonoBehaviour
             stats.CurrentLegs = (LegsBase)StartingArmour[10];
             stats.CurrentFeet = (FeetBase)StartingArmour[11];
         }
+
+        stats.CheckEquipment();
     }
 
     private void CheckStartingAbilities(string classname)

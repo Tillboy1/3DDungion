@@ -217,6 +217,100 @@ public class PlayerStats : NetworkBehaviour
         //StartCoroutine(AttackAn());
     }
 
+    #region Menu
+    public void OpenUI(InputAction.CallbackContext context)
+    {
+        Debug.Log("trying to open Game menu");
+    }
+    public void OpenCharacterSheet(InputAction.CallbackContext context)
+    {
+        if (CharacterSheet.activeSelf)
+        {
+            CharacterSheet.SetActive(false);
+        }
+        else
+        {
+            CharacterSheet.SetActive(true);
+        }
+    }
+    #endregion
+    #region Health
+    public void BaseHeal(int Healing)
+    {
+        if (CurrentHealth.Value + Healing <= maxHealth.Value)
+        {
+            CurrentHealth.Value += Healing;
+        }
+        else if (CurrentHealth.Value + Healing > maxHealth.Value)
+        {
+            CurrentHealth.Value = maxHealth.Value;
+        }
+    }
+    public void TakeDamage(float damage)
+    {
+        Debug.Log("Take Damage");
+        if (Sheild.Value > 0)
+        {
+            if (Sheild.Value - damage < 0)
+            {
+                Debug.Log("spillover");
+                float tempint = damage - Sheild.Value;
+
+                Sheild.Value = 0;
+                Debug.Log(damage + " = " + tempint);
+                damage = tempint;
+            }
+            else if (Sheild.Value - damage == 0)
+            {
+                Sheild.Value = 0;
+                damage = 0;
+            }
+            else
+            {
+                Debug.Log("tempHealth Damage");
+
+                float tempint = Sheild.Value - damage;
+
+                Sheild.Value -= tempint;
+                damage = 0;
+            }
+        }
+
+        if (CurrentHealth.Value - damage > 0)
+        {
+            CurrentHealth.Value -= damage;
+            //PlayerManager.instance.LoadMasks();
+            Debug.Log("showing health is not set");
+        }
+        else
+        {
+            CurrentHealth.Value = 0;
+            //PlayerManager.instance.LoadMasks();
+            Die();
+        }
+    }
+    private void Die()
+    {
+        currentlyDead = true;
+        this.GetComponent<SpriteRenderer>().color = Color.black;
+        Debug.Log("Death Animation");
+
+        StartCoroutine(DeathCo());
+    }
+    #endregion
+    #region Equipment
+    public void CheckEquipment()
+    {
+        primaryDamage = CurrentWeapon.Damage;
+
+        ArmourTotal.Value = CurrentHelmet.ArmourBounus;
+        ArmourTotal.Value += CurrentChestplate.ArmourBounus;
+        ArmourTotal.Value += CurrentLegs.ArmourBounus;
+        ArmourTotal.Value += CurrentFeet.ArmourBounus;
+
+        ArmourCurrent.Value = ArmourTotal.Value;
+    }
+    #endregion
     #region Abilities
     public void CheckAbilities()
     {
@@ -269,6 +363,7 @@ public class PlayerStats : NetworkBehaviour
         }
     }
 
+    #region AbilityButtons
     public void ActivateAbilityOne(InputAction.CallbackContext context)
     {
         if (ActiveAbilities[0].AbilityState == AbilityState.Ready && !isCasting)
@@ -361,95 +456,6 @@ public class PlayerStats : NetworkBehaviour
         }
     }
     #endregion
-    #region Menu
-    public void OpenUI(InputAction.CallbackContext context)
-    {
-        Debug.Log("trying to open Game menu");
-    }
-    public void OpenCharacterSheet(InputAction.CallbackContext context)
-    {
-        if (CharacterSheet.activeSelf)
-        {
-            CharacterSheet.SetActive(false);
-        }
-        else
-        {
-            CharacterSheet.SetActive(true);
-        }
-    }
-    #endregion
-    #region Health
-    public void BaseHeal(int Healing)
-    {
-        if (CurrentHealth.Value + Healing <= maxHealth.Value)
-        {
-            CurrentHealth.Value += Healing;
-        }
-        else if (CurrentHealth.Value + Healing > maxHealth.Value)
-        {
-            CurrentHealth.Value = maxHealth.Value;
-        }
-    }
-    public void TakeDamage(float damage)
-    {
-        Debug.Log("Take Damage");
-        if (Sheild.Value > 0)
-        {
-            if (Sheild.Value - damage < 0)
-            {
-                Debug.Log("spillover");
-                float tempint = damage - Sheild.Value;
-
-                Sheild.Value = 0;
-                Debug.Log(damage + " = " + tempint);
-                damage = tempint;
-            }
-            else if (Sheild.Value - damage == 0)
-            {
-                Sheild.Value = 0;
-                damage = 0;
-            }
-            else
-            {
-                Debug.Log("tempHealth Damage");
-
-                float tempint = Sheild.Value - damage;
-
-                Sheild.Value -= tempint;
-                damage = 0;
-            }
-        }
-
-        if (CurrentHealth.Value - damage > 0)
-        {
-            CurrentHealth.Value -= damage;
-            //PlayerManager.instance.LoadMasks();
-            Debug.Log("showing health is not set");
-        }
-        else
-        {
-            CurrentHealth.Value = 0;
-            //PlayerManager.instance.LoadMasks();
-            Die();
-        }
-    }
-    private void Die()
-    {
-        currentlyDead = true;
-        this.GetComponent<SpriteRenderer>().color = Color.black;
-        Debug.Log("Death Animation");
-
-        StartCoroutine(DeathCo());
-    }
-    #endregion
-    #region Equipment
-    public void CheckEquipment()
-    {
-        ArmourTotal.Value = CurrentHelmet.ArmourBounus;
-        ArmourTotal.Value += CurrentChestplate.ArmourBounus;
-        ArmourTotal.Value += CurrentLegs.ArmourBounus;
-        ArmourTotal.Value += CurrentFeet.ArmourBounus;
-    }
     #endregion
 
     IEnumerator WaitReact()

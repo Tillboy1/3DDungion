@@ -46,6 +46,7 @@ public class CharacterSheet : MonoBehaviour
     public GameObject MeleeSlot;
     public GameObject RangedSlot;
 
+    //holding items sections
     public GameObject HealmetArmourSection;
     public GameObject ChestArmourSection;
     public GameObject LegsArmourSection;
@@ -53,6 +54,7 @@ public class CharacterSheet : MonoBehaviour
 
     public GameObject MeleeWeaponSection;
     public GameObject RangedWeaponSection;
+    public GameObject ArcaneWeaponSection;
 
     public TMP_Text EquipmentNameText;
     public TMP_Text EquipmentDescriptionText;
@@ -134,7 +136,89 @@ public class CharacterSheet : MonoBehaviour
                 {
                     if (item.name == "Equipment Screen")
                     {
+                        foreach (Transform Section in item)
+                        {
+                            if (Section.name == "Armour")
+                            {
+                                foreach(Transform ArmourPart in Section)
+                                {
+                                    if (ArmourPart.name == "Head Armour Image")
+                                    {
+                                        HealmetSlot = ArmourPart.gameObject;
+                                    }
+                                    if (ArmourPart.name == "Chest Armour Image")
+                                    {
+                                        ChestSlot = ArmourPart.gameObject;
+                                    }
+                                    if (ArmourPart.name == "Legs Armour Image")
+                                    {
+                                        LegsSlot = ArmourPart.gameObject;
+                                    }
+                                    if (ArmourPart.name == "Feet Armour Image")
+                                    {
+                                        FeetSlot = ArmourPart.gameObject;
+                                    }
+                                }
+                            }
+                            if (Section.name == "Weapons")
+                            {
+                                foreach( Transform WeaponPart in Section)
+                                {
+                                    if (WeaponPart.name == "Melee Weapon Image")
+                                    {
+                                        MeleeSlot = WeaponPart.gameObject;
+                                    }
+                                    if (WeaponPart.name == "Ranged Weapon Image")
+                                    {
+                                        RangedSlot = WeaponPart.gameObject;
+                                    }
+                                }
+                            }
+                            if (Section.name == "Buttons")
+                            {
 
+                            }
+                            if (Section.name == "Armour Slider")
+                            {
+                                foreach(Transform Collection in Section.GetChild(0).transform)
+                                {
+                                    if (Collection.name == "Head Armour Slot")
+                                    {
+                                        HealmetArmourSection = Collection.gameObject;
+                                    }
+                                    if (Collection.name == "Chest Armour Slot")
+                                    {
+                                        ChestArmourSection = Collection.gameObject;
+                                    }
+                                    if (Collection.name == "Legs Armour Slot")
+                                    {
+                                        LegsArmourSection = Collection.gameObject;
+                                    }
+                                    if (Collection.name == "Feet Armour Slot")
+                                    {
+                                        FeetArmourSection = Collection.gameObject;
+                                    }
+                                }
+                            }
+                            if (Section.name == "Weapons Slider")
+                            {
+                                foreach (Transform Collection in Section.GetChild(0).transform)
+                                {
+                                    if (Collection.name == "Melee Weapon Slot")
+                                    {
+                                        MeleeWeaponSection = Collection.gameObject;
+                                    }
+                                    if (Collection.name == "Ranged Weapon Slot")
+                                    {
+                                        RangedWeaponSection = Collection.gameObject;
+                                    }
+                                    if (Collection.name == "Arcane Weapon Slot")
+                                    {
+                                        ArcaneWeaponSection = Collection.gameObject;
+                                    }
+                                }
+                            }
+                        }
                     }
                     else if (item.name == "Ability Info")
                     {

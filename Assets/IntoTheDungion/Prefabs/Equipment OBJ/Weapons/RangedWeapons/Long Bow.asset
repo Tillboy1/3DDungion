@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8125e3f5c0b54d4d8b1fb1a4e3e40af, type: 3}
-  m_Name: Clerics Staff
-  m_EditorClassIdentifier: Assembly-CSharp::CasterWeapon
-  Name: Cleric Staff
+  m_Script: {fileID: 11500000, guid: 767d04eeaff2a824e8c9c543ab363ab9, type: 3}
+  m_Name: Long Bow
+  m_EditorClassIdentifier: Assembly-CSharp::RangedWeapon
+  Name: Long Bow
   Description: 
   sprite: {fileID: 0}
-  Damage: 5
+  Damage: 8
   CritBounus: 0
-  statUsed: 3
-  StatAmountRequired: 10
-  AttackRange: 20
+  statUsed: 1
+  StatAmountRequired: 0
+  AttackRange: 30
