@@ -30,6 +30,11 @@ public class PlayerStats : NetworkBehaviour
     public GameObject CharacterSheet;
     public Sprite CharacterSprite;
 
+    [Header("camera")]
+    public GameObject CameraPrefab;
+    public bool TryingToLook;
+
+
     [Header("Health")]
     public NetworkVariable<float> CurrentHealth;
     public NetworkVariable<float> maxHealth;
@@ -129,6 +134,10 @@ public class PlayerStats : NetworkBehaviour
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
             CharacterSheet.GetComponent<CharacterSheet>().Player = this;
             Menu.GetComponentInChildren<CharacterCreator>().player = this.gameObject;
+
+            var Cam = Instantiate(CameraPrefab);
+
+            Cam.GetComponent<CameraHolder>().LocationOfset = transform.GetChild(1).gameObject;
         }
         PlayerManager.instance.PlayerJoined(this.gameObject);
     }
@@ -147,8 +156,15 @@ public class PlayerStats : NetworkBehaviour
         {
             StartCoroutine(PrimaryAttack());
         }
+
+        if (TryingToLook)
+        {
+            TurningCamera();
+        }
     }
 
+    #region Looking
+    #region Character Looking
     public void LockOn(InputAction.CallbackContext context)
     {
         TryingToLock = true;
@@ -216,6 +232,19 @@ public class PlayerStats : NetworkBehaviour
         }
         //StartCoroutine(AttackAn());
     }
+    #endregion
+    #region PlayerLooking
+    public void PlayerLooking(InputAction.CallbackContext context)
+    {
+        TryingToLook = context.ReadValue<bool>();
+    }
+    public void TurningCamera()
+    {
+        Vector2 TurnAmt = this.GetComponent<PlayerMovement>().m_LookAmt;
+    }
+
+    #endregion
+    #endregion
 
     #region Menu
     public void OpenUI(InputAction.CallbackContext context)

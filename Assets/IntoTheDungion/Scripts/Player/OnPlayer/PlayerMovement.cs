@@ -6,7 +6,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     private Rigidbody rb;
     private Vector2 m_moveAmt;
-    private Vector2 m_LookAmt;
+    public Vector2 m_LookAmt;
     public float moveSpeed;
     public PlayerInput input;
 

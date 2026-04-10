@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Rightclick",
+                    "type": "Button",
+                    "id": "aada6fea-789a-4a88-8bdc-c85dd7fa0174",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
@@ -629,6 +638,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "AbilityZero",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e025b5ca-c58d-468b-b893-bba6c78dfdba",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rightclick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

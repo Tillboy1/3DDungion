@@ -40,6 +40,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1671338882565253657}
+  - {fileID: 2711584678026383881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &6522940978550454468
@@ -427,6 +428,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 88262566-58f7-405c-8dca-c113acae3c73
     m_ActionName: 'Player/AbilityZero[/Keyboard/0]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aada6fea-789a-4a88-8bdc-c85dd7fa0174
+    m_ActionName: 'Player/Rightclick[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -444,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3313230929
+  GlobalObjectIdHash: 587204208
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -494,6 +499,7 @@ MonoBehaviour:
   HealthUI: {fileID: 0}
   CharacterSheet: {fileID: 0}
   CharacterSprite: {fileID: 21300000, guid: f80defe91ce6415468a5d0d09b84c985, type: 3}
+  CameraPrefab: {fileID: 6821465589342450796, guid: ce57d54d2fdd0d844850ce82cf3082fd, type: 3}
   CurrentHealth:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
@@ -674,6 +680,37 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!1 &975259524309461204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2711584678026383881}
+  m_Layer: 0
+  m_Name: Camera PivotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2711584678026383881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975259524309461204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 788534464908182326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5852634410324412905
 GameObject:
   m_ObjectHideFlags: 0
