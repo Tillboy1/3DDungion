@@ -13,7 +13,6 @@ public class PlayerMovement : NetworkBehaviour
     public Vector3 MouseLocation;
     public Vector3 hitPosition;
 
-
     public bool TryingToLook;
 
     public float xRotation;
@@ -38,6 +37,11 @@ public class PlayerMovement : NetworkBehaviour
     public void Update()
     {
         Looking();
+
+        if (TryingToLook)
+        {
+            TurningCamera();
+        }
     }
     private void FixedUpdate()
     {

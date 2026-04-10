@@ -22,12 +22,12 @@ MonoBehaviour:
   AbilityState: 0
   RemainingCasting: 0
   RemainingDuration: 0
-  RemainingRefresh: 0
+  RemainingRefresh: -0.010768729
   CurrentLevel: 1
   MaxLevel: 10
   CurrentEX: 0
   EXPToLevel: 1
   EXPDifficulties: 
   LvlAddition: 
-  DashForce: 5
+  DashForce: 10
   DashForceUpward: 2
