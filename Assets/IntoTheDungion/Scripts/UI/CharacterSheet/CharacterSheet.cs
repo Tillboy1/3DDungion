@@ -449,19 +449,19 @@ public class CharacterSheet : MonoBehaviour
         {
             Debug.Log("Got to show weapons " + Player.OwnedWeapons[i].name);
 
-            if (Player.OwnedWeapons[i].GetComponent<MeleeWeapon>())
+            if (Player.OwnedWeapons[i] is MeleeWeapon)
             {
                 var GO = Instantiate(WeaponPrefab, MeleeWeaponSection.transform);
                 GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
                 GO.GetComponent<WeaponHolder>().CharacterSheet = this;
             }
-            else if (Player.OwnedWeapons[i].GetComponent<RangedWeapon>())
+            else if (Player.OwnedWeapons[i] is RangedWeapon)
             {
                 var GO = Instantiate(WeaponPrefab, RangedWeaponSection.transform);
                 GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
                 GO.GetComponent<WeaponHolder>().CharacterSheet = this;
             }
-            else if (Player.OwnedWeapons[i].GetComponent<CasterWeapon>())
+            else if (Player.OwnedWeapons[i] is CasterWeapon)
             {
                 var GO = Instantiate(WeaponPrefab, ArcaneWeaponSection.transform);
                 GO.GetComponent<WeaponHolder>().HeldWeapon = Player.OwnedWeapons[i];
@@ -494,30 +494,30 @@ public class CharacterSheet : MonoBehaviour
         // Non active abilities
         for (int i = 0; i < Player.OwnedArmour.Count; i++)
         {
-            if (Player.OwnedArmour[i].GetComponent<HelmetBase>())
+            if (Player.OwnedArmour[i] is HelmetBase)
             {
                 Debug.Log("It is a Helmet");
                 var GO = Instantiate(ArmourPrefab, HealmetArmourSection.transform);
-                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
-                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+                GO.GetComponent<ArmourHolder>().HeldArmour = Player.OwnedArmour[i];
+                GO.GetComponent<ArmourHolder>().CharacterSheet = this;
             }
-            else if (Player.OwnedArmour[i].GetComponent<ChestplateBase>())
+            else if (Player.OwnedArmour[i] is ChestplateBase)
             {
                 var GO = Instantiate(ArmourPrefab, ChestArmourSection.transform);
-                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
-                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+                GO.GetComponent<ArmourHolder>().HeldArmour = Player.OwnedArmour[i];
+                GO.GetComponent<ArmourHolder>().CharacterSheet = this;
             }
-            else if (Player.OwnedArmour[i].GetComponent<LegsBase>())
+            else if (Player.OwnedArmour[i] is LegsBase)
             {
                 var GO = Instantiate(ArmourPrefab, LegsArmourSection.transform);
-                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
-                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+                GO.GetComponent<ArmourHolder>().HeldArmour = Player.OwnedArmour[i];
+                GO.GetComponent<ArmourHolder>().CharacterSheet = this;
             }
-            else if (Player.OwnedArmour[i].GetComponent<FeetBase>())
+            else if (Player.OwnedArmour[i] is FeetBase)
             {
                 var GO = Instantiate(ArmourPrefab, FeetArmourSection.transform);
-                GO.GetComponent<AbilityHolders>().HeldAbility = Player.Abilities[i];
-                GO.GetComponent<AbilityHolders>().CharacterSheet = this;
+                GO.GetComponent<ArmourHolder>().HeldArmour = Player.OwnedArmour[i];
+                GO.GetComponent<ArmourHolder>().CharacterSheet = this;
             }
         }
     }
