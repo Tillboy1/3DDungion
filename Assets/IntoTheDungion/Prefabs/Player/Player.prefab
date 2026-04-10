@@ -429,7 +429,19 @@ MonoBehaviour:
     m_ActionId: 88262566-58f7-405c-8dca-c113acae3c73
     m_ActionName: 'Player/AbilityZero[/Keyboard/0]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 198532364787824621}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: PlayerLooking
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: aada6fea-789a-4a88-8bdc-c85dd7fa0174
     m_ActionName: 'Player/Rightclick[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -475,6 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
+  m_LookAmt: {x: 0, y: 0}
   moveSpeed: 0.3
   input: {fileID: 1384357126660665336}
   MouseLocation: {x: 0, y: 0, z: 0}
@@ -500,6 +513,9 @@ MonoBehaviour:
   CharacterSheet: {fileID: 0}
   CharacterSprite: {fileID: 21300000, guid: f80defe91ce6415468a5d0d09b84c985, type: 3}
   CameraPrefab: {fileID: 6821465589342450796, guid: ce57d54d2fdd0d844850ce82cf3082fd, type: 3}
+  TryingToLook: 0
+  xRotation: 0
+  yRotation: 0
   CurrentHealth:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0

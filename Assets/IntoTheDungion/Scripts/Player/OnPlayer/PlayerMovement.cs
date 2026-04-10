@@ -13,6 +13,12 @@ public class PlayerMovement : NetworkBehaviour
     public Vector3 MouseLocation;
     public Vector3 hitPosition;
 
+
+    public bool TryingToLook;
+
+    public float xRotation;
+    public float yRotation;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -82,5 +88,23 @@ public class PlayerMovement : NetworkBehaviour
         float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, rotY, 0);
     }
+
+
+    #region Looking
+    public void PlayerLooking(InputAction.CallbackContext context)
+    {
+        TryingToLook = context.ReadValue<bool>();
+    }
+    public void TurningCamera()
+    {
+        yRotation += m_moveAmt.x;
+        xRotation -= m_moveAmt.y;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+        //rotate cam and orientation
+        transform.GetChild(1).transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        //orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+    #endregion
 
 }
