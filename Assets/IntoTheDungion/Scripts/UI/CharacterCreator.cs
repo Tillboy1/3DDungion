@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -6,7 +8,11 @@ public class CharacterCreator : MonoBehaviour
     public GameObject player;
 
     private string nameholder;
+
     private int ClassSelected;
+    private int SubClassSelected;
+    public TMP_Dropdown SubDropdown;
+
     public AbilitiesBase[] StartingAbilities;
     public WeaponBase[] StartingWeapons;
     public ArmourBase[] StartingArmour;
@@ -21,12 +27,38 @@ public class CharacterCreator : MonoBehaviour
         {
             case 0:
                 ClassSelected = 0;
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Sheild Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Health Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Damage Focused"));
                 break; 
             case 1:
                 ClassSelected = 1;
+                SubDropdown.options.Clear();
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Melee Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Ranged Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Arcane Focused"));
                 break;
             case 2:
                 ClassSelected = 2;
+                SubDropdown.options.Clear();
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("AOE Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("Targeting Focused"));
+                SubDropdown.options.Add(new TMP_Dropdown.OptionData("DamageBoost Focused"));
+                break;
+        }
+    }
+    public void SubClassChoice(int SubClass)
+    {
+        switch (SubClass)
+        {
+            case 0:
+                SubClassSelected = 0;
+                break;
+            case 1:
+                SubClassSelected = 1;
+                break;
+            case 2:
+                SubClassSelected = 2;
                 break;
         }
     }
@@ -43,7 +75,14 @@ public class CharacterCreator : MonoBehaviour
         //Class Selection
         if (ClassSelected <= 0)
         {
-            stats.maxHealth.Value = 400;
+            if (SubClassSelected != 1)
+            {
+                stats.maxHealth.Value = 400;
+            }
+            else
+            {
+                stats.maxHealth.Value = 600;
+            }
             stats.CurrentHealth.Value = stats.maxHealth.Value;
 
             stats.primaryAttack = true;
