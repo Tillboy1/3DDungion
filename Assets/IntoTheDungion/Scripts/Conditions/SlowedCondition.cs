@@ -11,6 +11,7 @@ public class SlowedCondition : ConditionsBase
     {
         OriginalSpeed = Player.GetComponent<PlayerMovement>().moveSpeed;
         SetSpeed = OriginalSpeed / Modifier;
+        Player.GetComponent<PlayerMovement>().moveSpeed = SetSpeed;
     }
     public override void Deactivate(GameObject Player)
     {

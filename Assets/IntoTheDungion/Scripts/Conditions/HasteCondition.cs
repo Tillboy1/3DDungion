@@ -17,5 +17,6 @@ public class HasteCondition : ConditionsBase
     public override void Deactivate(GameObject Player)
     {
         Player.GetComponent<PlayerMovement>().moveSpeed = OriginalSpeed;
+        //Return Attack Speed
     }
 }
