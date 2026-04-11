@@ -19,11 +19,9 @@ public class MassEnemy : BaseEnemy
     public float walkPointRange;
 
     //Attacking
-    public int damagetogive;
-
+    public int baseDamage;
     public float timeBetweenAttacks;
     bool alreadyatacked;
-    public string DEATHscreen;
 
     //states
     public float sightRange, attackRange;
@@ -89,7 +87,7 @@ public class MassEnemy : BaseEnemy
         if (!alreadyatacked)
         {
             //Attack code input here
-            player.GetComponent<PlayerStats>().TakeDamage(damagetogive);
+            player.GetComponent<PlayerStats>().TakeDamage(baseDamage);
 
 
             /////
@@ -115,18 +113,16 @@ public class MassEnemy : BaseEnemy
         if (other.GetComponent<PlayerStats>())
         {
             Debug.Log("Player Entered Range");
-            other.GetComponent<PlayerStats>().TakeDamage(damagetogive);
-        }
-        if (other.CompareTag("Player"))
-        {
+            player = other.transform;
             PlayerInRange = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponent<PlayerStats>())
         {
             PlayerInRange = false;
+            player = null;
         }
     }
 }
