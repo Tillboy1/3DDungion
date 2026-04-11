@@ -94,6 +94,11 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    public virtual void BaseHeal(int Heal)
+    {
+
+    }
+
     public virtual void Die()
     {
         this.gameObject.SetActive(false);
