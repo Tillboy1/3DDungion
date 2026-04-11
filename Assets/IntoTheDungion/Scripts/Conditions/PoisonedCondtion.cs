@@ -7,7 +7,6 @@ public class PoisonedCondtion : ConditionsBase
     public PlayerStats IsPlayer;
     public BaseEnemy IsEnemy;
 
-
     public override void Activate(GameObject Player)
     {
         if (Player.GetComponent<PlayerStats>())
@@ -21,7 +20,6 @@ public class PoisonedCondtion : ConditionsBase
     }
     public override void IfOnUpdate(GameObject Player)
     {
-
         if (IsPlayer)
         {
             IsPlayer.TakeDamage(damageInflicted);

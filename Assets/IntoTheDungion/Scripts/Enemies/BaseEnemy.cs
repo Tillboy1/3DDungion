@@ -38,6 +38,7 @@ public class BaseEnemy : MonoBehaviour
     public NetworkVariable<int> currentHealth;
     public int maxHealth;
     public bool Sheild;
+    public bool AbleToHeal;
 
     [Header("Combat Stats")]
     public int amountOfAttacks;
@@ -51,6 +52,7 @@ public class BaseEnemy : MonoBehaviour
     public List<GameObject> Players;
     public float distToPoint;
     public float speed;
+    public bool AbleToMove;
 
     public void ClosesestPlayer()
     {

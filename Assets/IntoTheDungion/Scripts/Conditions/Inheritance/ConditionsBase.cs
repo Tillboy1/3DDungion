@@ -8,6 +8,7 @@ public class ConditionsBase : ScriptableObject
     public string Description;
     public Sprite sprite;
     public bool OnUpdate;
+    public bool betweenseconds;
 
     [Header("Timers")]
     public float DelayTime;

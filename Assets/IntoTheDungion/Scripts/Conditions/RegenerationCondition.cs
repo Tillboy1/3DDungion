@@ -7,6 +7,11 @@ public class RegenerationCondition : ConditionsBase
     public PlayerStats IsPlayer;
     public BaseEnemy IsEnemy;
 
+    public void Awake()
+    {
+        OnUpdate = true;
+    }
+
     public override void Activate(GameObject Player)
     {
         if (Player.GetComponent<PlayerStats>())

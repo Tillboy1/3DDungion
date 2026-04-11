@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Collections;
 using Unity.VisualScripting;
+using JetBrains.Annotations;
 
 
 public enum AbilityState
@@ -39,6 +40,7 @@ public class PlayerStats : NetworkBehaviour
     public NetworkVariable<float> ArmourCurrent;
     public NetworkVariable<float> ArmourTotal;
     public NetworkVariable<float> Sheild;
+    public bool AbleToHeal;
 
     //public float CurrentHealth;
     //public float maxHealth;
@@ -83,6 +85,9 @@ public class PlayerStats : NetworkBehaviour
     public LegsBase CurrentLegs;
     public FeetBase CurrentFeet;
     public List<ArmourBase> OwnedArmour;
+
+    [Header("Conditions")]
+    public List<ConditionsBase> CurrentConditions;
 
     [Header("Leveling")]
     public NetworkVariable<int> CurrentLevel;
@@ -149,6 +154,7 @@ public class PlayerStats : NetworkBehaviour
     private void Update()
     {
         CheckAbilities();
+        CheckConditions();
 
         if (AbleToAttack && primaryAttack && Targeting != null)
         {
@@ -304,6 +310,56 @@ public class PlayerStats : NetworkBehaviour
         Debug.Log("Death Animation");
 
         StartCoroutine(DeathCo());
+    }
+    #endregion
+    #region Conditions
+    public void CheckConditions()
+    {
+        for (int i = 0; i < CurrentConditions.Count; i++)
+        {
+            if (CurrentConditions[i] != null)
+            {
+                switch (CurrentConditions[i].State)
+                {
+                    case AbilityState.Ready:
+                        CurrentConditions[i].RemainingDelay = CurrentConditions[i].DelayTime;
+                        CurrentConditions[i].State = AbilityState.Casting;
+                        break;
+                    case AbilityState.Casting:
+                        if (CurrentConditions[i].RemainingDelay > 0)
+                        {
+                            CurrentConditions[i].RemainingDelay -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            CurrentConditions[i].Activate(this.gameObject);
+                            CurrentConditions[i].RemainingTime = CurrentConditions[i].TotalTime;
+                            CurrentConditions[i].State = AbilityState.Undergoing;
+                        }
+                        break;
+                    case AbilityState.Undergoing:
+                        if (CurrentConditions[i].RemainingTime > 0)
+                        {
+                            if (CurrentConditions[i].OnUpdate && !CurrentConditions[i].betweenseconds)
+                            {
+                                StartCoroutine(ConditionsWait(i));
+                            }
+                            CurrentConditions[i].RemainingTime -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            CurrentConditions[i].State = AbilityState.Cooldown;
+                        }
+                        break;
+                    case AbilityState.Cooldown:
+
+                        CurrentConditions[i].Deactivate(this.gameObject);
+                        CurrentConditions.Remove(CurrentConditions[i]);
+
+                        break;
+                }
+            }
+        }
     }
     #endregion
     #region Equipment
@@ -465,6 +521,23 @@ public class PlayerStats : NetworkBehaviour
     }
     #endregion
     #endregion
+
+    IEnumerator ConditionsWait(int i)
+    {
+        string holdingname;
+
+        holdingname = CurrentConditions[i].name;
+        CurrentConditions[i].betweenseconds = true;
+        CurrentConditions[i].IfOnUpdate(this.gameObject);
+        yield return new WaitForSeconds(1);
+        if (i <= CurrentConditions.Count)
+        {
+            if (CurrentConditions[i].name == holdingname)
+            {
+                CurrentConditions[i].betweenseconds = false;
+            }
+        }
+    }
 
     IEnumerator WaitReact()
     {
