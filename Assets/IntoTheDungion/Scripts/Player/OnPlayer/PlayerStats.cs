@@ -262,12 +262,13 @@ public class PlayerStats : NetworkBehaviour
     }
     public void TakeDamage(float damage)
     {
-        Debug.Log("Take Damage");
-        if (Sheild.Value > 0)
+        Debug.Log("Take Damage " + damage);
+        if (Sheild.Value > 0 && damage > 0)
         {
+            Debug.Log(Sheild.Value);
             if (Sheild.Value - damage < 0)
             {
-                Debug.Log("spillover");
+                Debug.Log("Sheild spillover");
                 float tempint = damage - Sheild.Value;
 
                 Sheild.Value = 0;
@@ -276,31 +277,56 @@ public class PlayerStats : NetworkBehaviour
             }
             else if (Sheild.Value - damage == 0)
             {
+                Debug.Log("Sheild nullified");
                 Sheild.Value = 0;
                 damage = 0;
             }
             else
             {
-                Debug.Log("tempHealth Damage");
+                Debug.Log("Sheild Damage");
 
-                float tempint = Sheild.Value - damage;
-
-                Sheild.Value -= tempint;
+                Sheild.Value -= damage;
                 damage = 0;
             }
         }
+        if (ArmourCurrent.Value > 0 && damage > 0)
+        {
+            Debug.Log(ArmourCurrent.Value);
+            if (ArmourCurrent.Value - damage < 0)
+            {
+                Debug.Log("Armour spillover");
+                float tempint = damage - ArmourCurrent.Value;
 
-        if (CurrentHealth.Value - damage > 0)
-        {
-            CurrentHealth.Value -= damage;
-            //PlayerManager.instance.LoadMasks();
-            Debug.Log("showing health is not set");
+                ArmourCurrent.Value = 0;
+                Debug.Log(damage + " = " + tempint);
+                damage = tempint;
+            }
+            else if (ArmourCurrent.Value - damage == 0)
+            {
+                Debug.Log("Armour nullafied");
+                ArmourCurrent.Value = 0;
+                damage = 0;
+            }
+            else
+            {
+                Debug.Log("Armour Damage");
+
+                ArmourCurrent.Value -= damage;
+                damage = 0;
+            }
         }
-        else
+        if (damage > 0)
         {
-            CurrentHealth.Value = 0;
-            //PlayerManager.instance.LoadMasks();
-            Die();
+            if (CurrentHealth.Value - damage > 0)
+            {
+                CurrentHealth.Value -= damage;
+            }
+            else
+            {
+                CurrentHealth.Value = 0;
+                //PlayerManager.instance.LoadMasks();
+                Die();
+            }
         }
     }
     private void Die()

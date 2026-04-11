@@ -112,6 +112,11 @@ public class MassEnemy : BaseEnemy
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetComponent<PlayerStats>())
+        {
+            Debug.Log("Player Entered Range");
+            other.GetComponent<PlayerStats>().TakeDamage(damagetogive);
+        }
         if (other.CompareTag("Player"))
         {
             PlayerInRange = true;
