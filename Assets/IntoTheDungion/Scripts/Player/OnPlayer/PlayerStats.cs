@@ -50,13 +50,7 @@ public class PlayerStats : NetworkBehaviour
     //private bool ableToInteract = true;
 
     [Header("Stats")]
-    public int StrengthStat;
-    public int DexterityStat;
-    public int ConstatutionStat;
-    public int IntelligenceStat;
-    public int WisdomStat;
-    public int CharismaStat;
-
+    public int[] Modifiersstats = new int[6];
     public int ClassStatsRemaining;
     public int ModifierStatsRemaining;
 
@@ -356,6 +350,13 @@ public class PlayerStats : NetworkBehaviour
         {
             CurrentXp.Value += XpGiven;
         }
+    }
+
+    public void ModifireChange(int Slot)
+    {
+        Modifiersstats[Slot]++;
+
+        Debug.Log("check if stat change gives many major buffs");
     }
     #region Conditions
     public void CheckConditions()

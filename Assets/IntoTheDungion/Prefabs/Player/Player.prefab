@@ -540,17 +540,12 @@ MonoBehaviour:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 15
+    m_InternalValue: 0
   AbleToHeal: 0
   interacting: 0
-  StrengthStat: 0
-  DexterityStat: 0
-  ConstatutionStat: 0
-  IntelligenceStat: 0
-  WisdomStat: 0
-  CharismaStat: 0
+  Modifiersstats: 000000000000000000000000000000000000000000000000
   ClassStatsRemaining: 0
-  ModifierStatsRemaining: 0
+  ModifierStatsRemaining: 3
   primaryAttack: 1
   primaryHeals: 0
   CurrentWeapon: {fileID: 0}

@@ -22081,6 +22081,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   Player: {fileID: 0}
+  StatsBTN:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   StatsText:
   - {fileID: 0}
   - {fileID: 0}

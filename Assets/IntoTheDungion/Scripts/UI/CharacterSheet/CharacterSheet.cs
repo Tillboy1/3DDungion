@@ -9,6 +9,7 @@ public class CharacterSheet : MonoBehaviour
 {
     public PlayerStats Player;
 
+    public GameObject[] StatsBTN = new GameObject[6];
     public TMP_Text[] StatsText = new TMP_Text[6];
 
     public TMP_Text Armour;
@@ -77,6 +78,7 @@ public class CharacterSheet : MonoBehaviour
                 int tempcount = 0;
                 foreach (Transform Modifiers in objects)
                 {
+                    StatsBTN[tempcount] = Modifiers.GetChild(2).gameObject;
                     StatsText[tempcount] = Modifiers.GetChild(3).GetComponent<TMP_Text>();
                     tempcount++;
                 }
@@ -251,6 +253,7 @@ public class CharacterSheet : MonoBehaviour
         }
 
         //Sets All the UI
+        showOverviewStats();
         ShowAbilities();
         ShowWeapons();
         ShowArmour();
@@ -259,6 +262,12 @@ public class CharacterSheet : MonoBehaviour
     {
         SlectedAbilitySlot = SlotNumber;
     }
+    public void ModifierChange(int ModSlot)
+    {
+        Player.ModifireChange(ModSlot);
+        showOverviewStats();
+    }
+    #region InfoDisplayes
     public void UpdateAbilityInfo(AbilitiesBase AbilityTS)
     {
         if (AbilityTS != null)
@@ -297,6 +306,8 @@ public class CharacterSheet : MonoBehaviour
             SlectedArmour = ArmourTS;
         }
     }
+    #endregion
+    #region ChangingStuff
     public void ChangeAbility()
     {
         if (Player.ActiveAbilities[SlectedAbilitySlot] != null)
@@ -421,7 +432,35 @@ public class CharacterSheet : MonoBehaviour
             ShowArmour();
         }
     }
+    #endregion
+    #region VariablesToText
+    public void showOverviewStats()
+    {
+        for (int i = 0; i < StatsText.Length; i++)
+        {
+            StatsText[i].text = Player.Modifiersstats[i].ToString();
+        }
 
+        if(Player.ModifierStatsRemaining > 0)
+        {
+            for (int i = 0; i < StatsBTN.Length; i++)
+            {
+                StatsBTN[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < StatsBTN.Length; i++)
+            {
+                StatsBTN[i].SetActive(false);
+            }
+        }
+
+        Armour.text = new string (Player.ArmourCurrent.Value.ToString() + "\n Armour");
+
+        Health.text = new string (Player.CurrentHealth.Value.ToString() + "/" + Player.maxHealth.Value.ToString());
+        TempHealth.text = new string(Player.Sheild.Value.ToString() + "\n Sheild");
+    }
     public void ShowAbilities()
     {
         // Active Abilities
@@ -546,4 +585,5 @@ public class CharacterSheet : MonoBehaviour
             }
         }
     }
+    #endregion
 }
