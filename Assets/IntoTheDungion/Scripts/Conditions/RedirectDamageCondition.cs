@@ -19,7 +19,7 @@ public class RedirectDamageCondition : ConditionsBase
             }
             else
             {
-                persontodirect.GetComponent<BaseEnemy>().TakeDamage(Damage);
+                persontodirect.GetComponent<BaseEnemy>().TakeDamage(Damage, CauserOfEffliction);
                 return 0;
             }
         }
@@ -35,7 +35,7 @@ public class RedirectDamageCondition : ConditionsBase
                 }
                 else
                 {
-                    persontodirect.GetComponent<BaseEnemy>().TakeDamage(MaxDamageTransfer);
+                    persontodirect.GetComponent<BaseEnemy>().TakeDamage(MaxDamageTransfer, CauserOfEffliction);
                     return Damage - MaxDamageTransfer;
                 }
             }
@@ -48,7 +48,7 @@ public class RedirectDamageCondition : ConditionsBase
                 }
                 else
                 {
-                    persontodirect.GetComponent<BaseEnemy>().TakeDamage(Damage);
+                    persontodirect.GetComponent<BaseEnemy>().TakeDamage(Damage, CauserOfEffliction);
                     return 0;
                 }
             }

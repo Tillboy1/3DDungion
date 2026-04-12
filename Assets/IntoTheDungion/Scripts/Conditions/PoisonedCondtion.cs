@@ -31,7 +31,7 @@ public class PoisonedCondtion : ConditionsBase
         }
         else
         {
-            IsEnemy.TakeDamage(damageInflicted);
+            IsEnemy.TakeDamage(damageInflicted, CauserOfEffliction);
         }
     }
 }

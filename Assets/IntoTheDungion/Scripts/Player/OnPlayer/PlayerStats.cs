@@ -218,10 +218,10 @@ public class PlayerStats : NetworkBehaviour
 
         if (Abletosee)
         {
-            Debug.Log("in line of Sight");
+            //Debug.Log("in line of Sight");
             if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals)
             {
-                playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage);
+                playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage, this.gameObject);
             }
             else if (playerTotarget.transform.GetComponent<PlayerStats>() && primaryHeals)
             {
@@ -262,55 +262,42 @@ public class PlayerStats : NetworkBehaviour
     }
     public void TakeDamage(float damage)
     {
-        Debug.Log("Take Damage " + damage);
         if (Sheild.Value > 0 && damage > 0)
         {
-            Debug.Log(Sheild.Value);
             if (Sheild.Value - damage < 0)
             {
-                Debug.Log("Sheild spillover");
                 float tempint = damage - Sheild.Value;
 
                 Sheild.Value = 0;
-                Debug.Log(damage + " = " + tempint);
                 damage = tempint;
             }
             else if (Sheild.Value - damage == 0)
             {
-                Debug.Log("Sheild nullified");
                 Sheild.Value = 0;
                 damage = 0;
             }
             else
             {
-                Debug.Log("Sheild Damage");
-
                 Sheild.Value -= damage;
                 damage = 0;
             }
         }
         if (ArmourCurrent.Value > 0 && damage > 0)
         {
-            Debug.Log(ArmourCurrent.Value);
             if (ArmourCurrent.Value - damage < 0)
             {
-                Debug.Log("Armour spillover");
                 float tempint = damage - ArmourCurrent.Value;
 
                 ArmourCurrent.Value = 0;
-                Debug.Log(damage + " = " + tempint);
                 damage = tempint;
             }
             else if (ArmourCurrent.Value - damage == 0)
             {
-                Debug.Log("Armour nullafied");
                 ArmourCurrent.Value = 0;
                 damage = 0;
             }
             else
             {
-                Debug.Log("Armour Damage");
-
                 ArmourCurrent.Value -= damage;
                 damage = 0;
             }
@@ -346,6 +333,30 @@ public class PlayerStats : NetworkBehaviour
         StartCoroutine(DeathCo());
     }
     #endregion
+    public void ReciveXP(int XpGiven)
+    {
+        if (CurrentXp.Value + XpGiven > RequiredXp.Value)
+        {
+            CurrentXp.Value += XpGiven;
+            CurrentXp.Value -= RequiredXp.Value;
+
+            CurrentLevel.Value++;
+
+            // Checks if the Xp Required amount increases
+            for (int i = 0; i < XpRequireBounus.Length; i++)
+            {
+                if (CurrentLevel.Value == XpRequireBounus[i])
+                {
+                    RequiredXp.Value += XpLevelBonus[i];
+                }
+            }
+
+        }
+        else if (CurrentXp.Value + XpGiven <= RequiredXp.Value)
+        {
+            CurrentXp.Value += XpGiven;
+        }
+    }
     #region Conditions
     public void CheckConditions()
     {
@@ -464,93 +475,123 @@ public class PlayerStats : NetworkBehaviour
     #region AbilityButtons
     public void ActivateAbilityOne(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[0].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[0] != null)
         {
-            Debug.Log("Ability Used");
+            if (ActiveAbilities[0].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[0] != null)
+            {
+                Debug.Log("Ability Used");
 
-            ActiveAbilities[0].AbilityState = AbilityState.Casting;
-            ActiveAbilities[0].RemainingCasting = ActiveAbilities[0].CastingTime;
+                ActiveAbilities[0].AbilityState = AbilityState.Casting;
+                ActiveAbilities[0].RemainingCasting = ActiveAbilities[0].CastingTime;
+            }
         }
     }
     public void ActivateAbilityTwo(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[1].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[1] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[1].AbilityState = AbilityState.Casting;
-            ActiveAbilities[1].RemainingCasting = ActiveAbilities[1].CastingTime;
+            if (ActiveAbilities[1].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[1] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[1].AbilityState = AbilityState.Casting;
+                ActiveAbilities[1].RemainingCasting = ActiveAbilities[1].CastingTime;
+            }
         }
     }
     public void ActivateAbilityThree(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[2].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[2] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[2].AbilityState = AbilityState.Casting;
-            ActiveAbilities[2].RemainingCasting = ActiveAbilities[2].CastingTime;
+            if (ActiveAbilities[2].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[2] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[2].AbilityState = AbilityState.Casting;
+                ActiveAbilities[2].RemainingCasting = ActiveAbilities[2].CastingTime;
+            }
         }
     }
     public void ActivateAbilityFour(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[3].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[3] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[3].AbilityState = AbilityState.Casting;
-            ActiveAbilities[3].RemainingCasting = ActiveAbilities[3].CastingTime;
+            if (ActiveAbilities[3].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[3] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[3].AbilityState = AbilityState.Casting;
+                ActiveAbilities[3].RemainingCasting = ActiveAbilities[3].CastingTime;
+            }
         }
     }
     public void ActivateAbilityFive(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[4].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[4] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[4].AbilityState = AbilityState.Casting;
-            ActiveAbilities[4].RemainingCasting = ActiveAbilities[4].CastingTime;
+            if (ActiveAbilities[4].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[4] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[4].AbilityState = AbilityState.Casting;
+                ActiveAbilities[4].RemainingCasting = ActiveAbilities[4].CastingTime;
+            }
         }
     }
     public void ActivateAbilitySix(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[5].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[5] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[5].AbilityState = AbilityState.Casting;
-            ActiveAbilities[5].RemainingCasting = ActiveAbilities[5].CastingTime;
+            if (ActiveAbilities[5].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[5] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[5].AbilityState = AbilityState.Casting;
+                ActiveAbilities[5].RemainingCasting = ActiveAbilities[5].CastingTime;
+            }
         }
     }
     public void ActivateAbilitySeven(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[6].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[6] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[6].AbilityState = AbilityState.Casting;
-            ActiveAbilities[6].RemainingCasting = ActiveAbilities[6].CastingTime;
+            if (ActiveAbilities[6].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[6] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[6].AbilityState = AbilityState.Casting;
+                ActiveAbilities[6].RemainingCasting = ActiveAbilities[6].CastingTime;
+            }
         }
     }
     public void ActivateAbilityEight(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[7].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[7] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[7].AbilityState = AbilityState.Casting;
-            ActiveAbilities[7].RemainingCasting = ActiveAbilities[7].CastingTime;
+            if (ActiveAbilities[7].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[7] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[7].AbilityState = AbilityState.Casting;
+                ActiveAbilities[7].RemainingCasting = ActiveAbilities[7].CastingTime;
+            }
         }
     }
     public void ActivateAbilitynine(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[8].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[8] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[8].AbilityState = AbilityState.Casting;
-            ActiveAbilities[8].RemainingCasting = ActiveAbilities[8].CastingTime;
+            if (ActiveAbilities[8].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[8] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[8].AbilityState = AbilityState.Casting;
+                ActiveAbilities[8].RemainingCasting = ActiveAbilities[8].CastingTime;
+            }
         }
     }
     public void ActivateAbilityZero(InputAction.CallbackContext context)
     {
-        if (ActiveAbilities[9].AbilityState == AbilityState.Ready && !isCasting)
+        if (ActiveAbilities[9] != null)
         {
-            Debug.Log("Ability Used");
-            ActiveAbilities[9].AbilityState = AbilityState.Casting;
-            ActiveAbilities[9].RemainingCasting = ActiveAbilities[9].CastingTime;
+            if (ActiveAbilities[9].AbilityState == AbilityState.Ready && !isCasting && ActiveAbilities[9] != null)
+            {
+                Debug.Log("Ability Used");
+                ActiveAbilities[9].AbilityState = AbilityState.Casting;
+                ActiveAbilities[9].RemainingCasting = ActiveAbilities[9].CastingTime;
+            }
         }
     }
     #endregion

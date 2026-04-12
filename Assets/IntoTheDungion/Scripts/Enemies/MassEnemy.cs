@@ -77,7 +77,6 @@ public class MassEnemy : BaseEnemy
     }
     public virtual void AttackPlayer()
     {
-        Debug.Log("trying to attack the player");
         //make sure enemydosn't move
         agent.SetDestination(transform.position);
 
@@ -110,7 +109,6 @@ public class MassEnemy : BaseEnemy
     {
         if (other.GetComponent<PlayerStats>())
         {
-            Debug.Log("Player Entered Range");
             player = other.transform;
             PlayerInRange = true;
         }

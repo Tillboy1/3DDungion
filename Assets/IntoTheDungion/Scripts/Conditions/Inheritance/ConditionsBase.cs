@@ -19,6 +19,9 @@ public class ConditionsBase : ScriptableObject
     public float RemainingDelay;
     public float RemainingTime;
 
+    [Header("Attacking Info")]
+    public GameObject CauserOfEffliction;
+
     public virtual void Activate(GameObject Player) { }
     public virtual void IfOnUpdate(GameObject Player) { }
     public virtual void Deactivate(GameObject Player) { }

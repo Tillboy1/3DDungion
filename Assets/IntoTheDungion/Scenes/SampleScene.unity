@@ -6576,12 +6576,14 @@ MonoBehaviour:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
-  maxHealth: 1000
+  maxHealth: 200
   Sheild: 0
   AbleToHeal: 0
   amountOfAttacks: 0
   attackSpeed: 0
   attacksPossible: []
+  XPOnDeath: 10
+  Attackers: []
   TargetGO: {fileID: 0}
   Players: []
   distToPoint: 0

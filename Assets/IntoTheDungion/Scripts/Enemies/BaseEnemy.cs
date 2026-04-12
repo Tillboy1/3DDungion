@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public enum AttackDirection
 {
@@ -47,6 +48,9 @@ public class BaseEnemy : MonoBehaviour
 
     public AttacksSlots[] attacksPossible;
 
+    public int XPOnDeath;
+    public List<GameObject> Attackers;
+
     [Header("Movement")]
     public GameObject TargetGO;
     public List<GameObject> Players;
@@ -83,12 +87,14 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int Damage)
+    public virtual void TakeDamage(int Damage, GameObject Attacker)
     {
+        if(!Attackers.Contains(Attacker))
+            Attackers.Add(Attacker);
         if (currentHealth.Value - Damage <= 0)
         {
-            currentHealth.Value -= Damage;
-            Die();
+            currentHealth.Value = 0;
+            Die(Attacker);
         }
         else
         {
@@ -96,13 +102,30 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    public virtual void BaseHeal(int Heal)
+    public virtual void BaseHeal(int Healing)
     {
-
+        if (currentHealth.Value + Healing <= maxHealth)
+        {
+            currentHealth.Value += Healing;
+        }
+        else if (currentHealth.Value + Healing > maxHealth)
+        {
+            currentHealth.Value = maxHealth;
+        }
     }
 
-    public virtual void Die()
+    public virtual void Die(GameObject Attacker)
     {
+        for (int i = 0; i < Attackers.Count; i++)
+        {
+            if (Attackers[i].GetComponent<PlayerStats>())
+            {
+                Attackers[i].GetComponent<PlayerStats>().ReciveXP(XPOnDeath);
+
+                if (Attackers[i].GetComponent<PlayerStats>().Targeting == this.gameObject)
+                    Attackers[i].GetComponent<PlayerStats>().Targeting = null;
+            }
+        }
         this.gameObject.SetActive(false);
     }
 }

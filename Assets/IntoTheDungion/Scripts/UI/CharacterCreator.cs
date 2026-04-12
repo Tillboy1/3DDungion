@@ -17,6 +17,10 @@ public class CharacterCreator : MonoBehaviour
     public WeaponBase[] StartingWeapons;
     public ArmourBase[] StartingArmour;
 
+    public void Awake()
+    {
+        SubDropdown = this.transform.GetChild(2).GetComponent<TMP_Dropdown>();
+    }
     public void CharacterName(string name)
     {
         nameholder = name;
