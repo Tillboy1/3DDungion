@@ -9,6 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     public Vector2 m_LookAmt;
     public float moveSpeed;
     public PlayerInput input;
+    public PlayerStats stats;
 
     public Vector3 MouseLocation;
     public Vector3 hitPosition;
@@ -33,14 +34,19 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
 
         this.GetComponent<PlayerStats>().enabled = true;
+        stats = GetComponent<PlayerStats>();
     }
     public void Update()
     {
-        Looking();
+        CharacterLooking();
 
-        if (TryingToLook)
+        if (TryingToLook && stats.Targeting == null)
         {
             TurningCamera();
+        }
+        if(stats.Targeting != null)
+        {
+            transform.LookAt(stats.Targeting.transform);
         }
     }
     private void FixedUpdate()
@@ -61,7 +67,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb.position = new Vector3(rb.position.x + (m_moveAmt.y * moveSpeed), rb.position.y, rb.position.z + (-m_moveAmt.x * moveSpeed));
     }
-    public void Looking()
+    public void CharacterLooking()
     {
         Ray raytest = Camera.main.ScreenPointToRay(new Vector3(m_LookAmt.x, m_LookAmt.y));
 
@@ -90,11 +96,10 @@ public class PlayerMovement : NetworkBehaviour
         Vector3 rotation = hitPosition - transform.position;
 
         float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, rotY, 0);
+        transform.rotation = Quaternion.Euler(0, rotY + 90, 0);
     }
 
-
-    #region Looking
+    #region Camera
     public void PlayerLooking(InputAction.CallbackContext context)
     {
         TryingToLook = context.ReadValue<bool>();
@@ -102,7 +107,7 @@ public class PlayerMovement : NetworkBehaviour
     public void TurningCamera()
     {
         yRotation += m_moveAmt.x;
-        xRotation -= m_moveAmt.y;
+        xRotation += m_moveAmt.y;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
         //rotate cam and orientation

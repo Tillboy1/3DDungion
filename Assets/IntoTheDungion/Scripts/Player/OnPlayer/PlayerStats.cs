@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using Unity.Collections;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using System.Text;
 
 
 public enum AbilityState
@@ -167,18 +168,17 @@ public class PlayerStats : NetworkBehaviour
     {
         bool Abletosee = false;
 
-        /* test ui
+        //* test ui
          RaycastHit rayinfo;
 
-        Vector3 rotation = Targeting.transform.position - transform.position;
+        Vector3 rotation = Targeting.transform.position - AttackPoint.transform.position;
 
         float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, rotY, 0);
+        AttackPoint.transform.rotation = Quaternion.Euler(0, rotY, 0);
 
-        if (Physics.Raycast(this.transform.position + new Vector3(0, 17f, 0), new Vector3(0, rotY, 0), out rayinfo, Vector3.Distance(this.transform.position, Targeting.transform.position) + 3f))
+        if (Physics.Raycast(AttackPoint.transform.position + new Vector3(0, 17f, 0), new Vector3(0, rotY, 0), out rayinfo, Vector3.Distance(AttackPoint.transform.position, Targeting.transform.position) + 4f))
         {
-            Debug.DrawLine(this.transform.position, Targeting.transform.position);
-            Debug.Log(rayinfo.collider.name);
+            Debug.DrawLine(AttackPoint.transform.position, Targeting.transform.position);
 
             if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
             {
@@ -188,15 +188,18 @@ public class PlayerStats : NetworkBehaviour
                     Debug.Log("Hitting target");
                     Abletosee = true;
                 }
-
-                Debug.Log(Abletosee);
+                else
+                {
+                    Debug.Log(rayinfo.collider.name);
+                }
             }
+            Debug.Log(rayinfo.collider.gameObject.name);
         }
-        */
-        Abletosee = true;
-
 
         /*
+        //Abletosee = true;
+
+
         if (Physics.Raycast(this.transform.position, Targeting.transform.position, out rayinfo))
         {
             if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
@@ -229,6 +232,14 @@ public class PlayerStats : NetworkBehaviour
                     playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
                 }
             }
+            else
+            {
+                Debug.Log("the distance was " + distance);
+            }
+        }
+        else
+        {
+            Debug.Log("didn't see them ");
         }
         //StartCoroutine(AttackAn());
     }
