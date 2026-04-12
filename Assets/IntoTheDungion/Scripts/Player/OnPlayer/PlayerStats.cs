@@ -4,8 +4,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Collections;
-using Unity.VisualScripting;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 
 public enum AbilityState
@@ -55,6 +55,7 @@ public class PlayerStats : NetworkBehaviour
     public int ModifierStatsRemaining;
 
     [Header("Combat")]
+    public GameObject AttackPoint;
     public bool primaryAttack;
     public bool primaryHeals;
 
@@ -143,6 +144,7 @@ public class PlayerStats : NetworkBehaviour
         CurrentHealth.Value = maxHealth.Value;
 
         this.transform.position = new Vector3(0, 7f, 0);
+        AttackPoint = this.transform.GetChild(2).transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -210,16 +212,22 @@ public class PlayerStats : NetworkBehaviour
         }
         */
 
+        float distance = Vector3.Distance(AttackPoint.transform.position, Targeting.transform.position);
+
         if (Abletosee)
         {
-            //Debug.Log("in line of Sight");
-            if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals)
+            if (distance <= CurrentWeapon.AttackRange)
             {
-                playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage, this.gameObject);
-            }
-            else if (playerTotarget.transform.GetComponent<PlayerStats>() && primaryHeals)
-            {
-                playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
+                Debug.Log("attack working at range of " + distance + "from " + CurrentWeapon.AttackRange);
+                //Debug.Log("in line of Sight");
+                if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals)
+                {
+                    playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage, this.gameObject);
+                }
+                else if (playerTotarget.transform.GetComponent<PlayerStats>() && primaryHeals)
+                {
+                    playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
+                }
             }
         }
         //StartCoroutine(AttackAn());
