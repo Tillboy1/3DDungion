@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 844963913527231648}
   - component: {fileID: 2435101831592469317}
   - component: {fileID: 7068743815380958555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,6 +541,7 @@ MonoBehaviour:
       MinSecondsBetweenUpdates: 0
       MaxSecondsBetweenUpdates: 0
     m_InternalValue: 15
+  AbleToHeal: 0
   interacting: 0
   StrengthStat: 0
   DexterityStat: 0
@@ -571,6 +572,7 @@ MonoBehaviour:
   OwnedArmour:
   - {fileID: 11400000, guid: efb35da8066978940a79f4a19f2944f0, type: 2}
   - {fileID: 11400000, guid: 7f133537521587946b337208eef7e0bf, type: 2}
+  CurrentConditions: []
   CurrentLevel:
     UpdateTraits:
       MinSecondsBetweenUpdates: 0

@@ -6589,18 +6589,17 @@ MonoBehaviour:
   AbleToMove: 0
   agent: {fileID: 2105297084}
   player: {fileID: 0}
-  playerStateSystem: {fileID: 0}
   whatatisground:
     serializedVersion: 2
     m_Bits: 64
   whatisplayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   PlayerInRange: 0
   walkpoint: {x: 0, y: 0, z: 0}
   walkPointRange: 40
-  baseDamage: 0
-  timeBetweenAttacks: 0
+  baseDamage: 8
+  timeBetweenAttacks: 5
   sightRange: 10
   attackRange: 3
   playerinsightRange: 0
@@ -6741,7 +6740,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &48037795226996564
 GameObject:

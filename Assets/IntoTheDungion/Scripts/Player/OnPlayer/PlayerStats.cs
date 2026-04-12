@@ -328,6 +328,14 @@ public class PlayerStats : NetworkBehaviour
                 Die();
             }
         }
+
+        for (int i = 0; i < CurrentConditions.Count; i++)
+        {
+            if (CurrentConditions[i] is BleedingCondition)
+            {
+                CurrentConditions[i].GetComponent<BleedingCondition>().Bleeding(this.gameObject);
+            }
+        }
     }
     private void Die()
     {

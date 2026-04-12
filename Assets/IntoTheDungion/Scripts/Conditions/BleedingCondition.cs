@@ -7,6 +7,7 @@ public class BleedingCondition : ConditionsBase
 
     public void Bleeding(GameObject Player)
     {
+        Debug.Log("done bleeding by " + BleedDamage + "Damage");
         if (Player.GetComponent<PlayerStats>())
         {
             Player.GetComponent<PlayerStats>().CurrentHealth.Value -= BleedDamage;

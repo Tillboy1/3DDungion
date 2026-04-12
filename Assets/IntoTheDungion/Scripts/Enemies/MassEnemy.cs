@@ -8,9 +8,7 @@ public class MassEnemy : BaseEnemy
 {
     public NavMeshAgent agent;
     public Transform player;
-    public GameObject playerStateSystem;
     public LayerMask whatatisground, whatisplayer;
-
     public bool PlayerInRange;
 
     //patrolling
@@ -79,7 +77,7 @@ public class MassEnemy : BaseEnemy
     }
     public virtual void AttackPlayer()
     {
-
+        Debug.Log("trying to attack the player");
         //make sure enemydosn't move
         agent.SetDestination(transform.position);
 
@@ -121,8 +119,8 @@ public class MassEnemy : BaseEnemy
     {
         if (other.GetComponent<PlayerStats>())
         {
-            PlayerInRange = false;
             player = null;
+            PlayerInRange = false;
         }
     }
 }
