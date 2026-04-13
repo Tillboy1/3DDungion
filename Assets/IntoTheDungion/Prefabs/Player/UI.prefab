@@ -15446,6 +15446,7 @@ MonoBehaviour:
   StartingAbilities:
   - {fileID: 11400000, guid: be9621321452c14499965a298f136d10, type: 2}
   - {fileID: 11400000, guid: 2cbfb2ec498e58948bffe95dc605a9d6, type: 2}
+  - {fileID: 11400000, guid: a161b2b29b588f8498506ca955c7a09f, type: 2}
   StartingWeapons:
   - {fileID: 11400000, guid: 8f542470c93b63449be4c3153776b7e5, type: 2}
   - {fileID: 11400000, guid: 26c99ca9d22c7be48b21288bd01f142e, type: 2}

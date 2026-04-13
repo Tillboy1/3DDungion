@@ -65,6 +65,7 @@ public class PlayerStats : NetworkBehaviour
     public List<WeaponBase> OwnedWeapons;
 
     public int primaryDamage;
+    public float AttackSpeed = 2;
     private bool AbleToAttack = true;
 
     public bool TryingToLock;
@@ -74,6 +75,17 @@ public class PlayerStats : NetworkBehaviour
     public bool AbleToMove = true;
     public bool currentlyDead = false;
     public bool IsResting;
+
+    [Header("Bonus")]
+    public int MeleeBonus;
+    public int RangedBonus;
+    public int ArcaneBonus;
+
+    public float AttackSpeedModifier;
+
+    public int AOEBonus;
+    public int SheildBonus;
+    public int HealthBonus;
 
     [Header("Armour")]
     public HelmetBase CurrentHelmet;
@@ -166,14 +178,14 @@ public class PlayerStats : NetworkBehaviour
     }
     public void RepeatTarget(GameObject playerTotarget)
     {
-        bool Abletosee = false;
+        bool Abletosee = true;
 
-        //* test ui
+        /* test ui
          RaycastHit rayinfo;
 
         Vector3 rotation = Targeting.transform.position - AttackPoint.transform.position;
 
-        float rotY = Mathf.Atan2(-rotation.z, rotation.x) * Mathf.Rad2Deg;
+        float rotY = Mathf.Atan2(rotation.z, rotation.x) * Mathf.Rad2Deg;
         AttackPoint.transform.rotation = Quaternion.Euler(0, rotY, 0);
 
         if (Physics.Raycast(AttackPoint.transform.position + new Vector3(0, 17f, 0), new Vector3(0, rotY, 0), out rayinfo, Vector3.Distance(AttackPoint.transform.position, Targeting.transform.position) + 4f))
@@ -195,24 +207,6 @@ public class PlayerStats : NetworkBehaviour
             }
             Debug.Log(rayinfo.collider.gameObject.name);
         }
-
-        /*
-        //Abletosee = true;
-
-
-        if (Physics.Raycast(this.transform.position, Targeting.transform.position, out rayinfo))
-        {
-            if (rayinfo.collider.GetComponent<PlayerStats>() || rayinfo.collider.GetComponent<BaseEnemy>())
-            {
-                if (rayinfo.collider.gameObject == Targeting.gameObject)
-                {
-                    Abletosee = true;
-                }
-
-                Debug.Log(Abletosee);
-                Debug.DrawLine(this.transform.position, Targeting.transform.position);
-            }
-        }
         */
 
         float distance = Vector3.Distance(AttackPoint.transform.position, Targeting.transform.position);
@@ -223,13 +217,21 @@ public class PlayerStats : NetworkBehaviour
             {
                 Debug.Log("attack working at range of " + distance + "from " + CurrentWeapon.AttackRange);
                 //Debug.Log("in line of Sight");
-                if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals)
+                if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals && CurrentWeapon is MeleeWeapon)
                 {
-                    playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage, this.gameObject);
+                    playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage + MeleeBonus, this.gameObject);
+                }
+                else if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals && CurrentWeapon is RangedWeapon)
+                {
+                    playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage + RangedBonus, this.gameObject);
+                }
+                else if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals && CurrentWeapon is CasterWeapon)
+                {
+                    playerTotarget.transform.GetComponent<BaseEnemy>().TakeDamage(primaryDamage + ArcaneBonus, this.gameObject);
                 }
                 else if (playerTotarget.transform.GetComponent<PlayerStats>() && primaryHeals)
                 {
-                    playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage);
+                    playerTotarget.transform.GetComponent<PlayerStats>().BaseHeal(primaryDamage + ArcaneBonus);
                 }
             }
             else
@@ -633,7 +635,6 @@ public class PlayerStats : NetworkBehaviour
             }
         }
     }
-
     IEnumerator WaitReact()
     {
         yield return new WaitForSeconds(.3f);
@@ -644,7 +645,7 @@ public class PlayerStats : NetworkBehaviour
     {
         AbleToAttack = false;
         RepeatTarget(Targeting);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(AttackSpeed / AttackSpeedModifier);
         AbleToAttack = true;
 
     }

@@ -20,6 +20,8 @@ public class AbilitiesBase : ScriptableObject
     public float RemainingDuration;
     public float RemainingRefresh;
 
+    public int AbilityRange;
+
     [Header("Leveling UP")]
     public int CurrentLevel = 1;
     public int MaxLevel = 10;

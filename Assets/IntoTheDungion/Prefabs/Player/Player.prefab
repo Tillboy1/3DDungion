@@ -557,12 +557,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26c99ca9d22c7be48b21288bd01f142e, type: 2}
   - {fileID: 11400000, guid: b42c97666b4e5ef478488e125620aec6, type: 2}
   primaryDamage: 10
+  AttackSpeed: 2
   TryingToLock: 0
   Targeting: {fileID: 0}
   Attackable: []
   AbleToMove: 1
   currentlyDead: 0
   IsResting: 0
+  MeleeBonus: 0
+  RangedBonus: 0
+  ArcaneBonus: 0
+  AttackSpeedModifier: 1
+  AOEBonus: 0
+  SheildBonus: 0
+  HealthBonus: 0
   CurrentHelmet: {fileID: 0}
   CurrentChestplate: {fileID: 0}
   CurrentLegs: {fileID: 0}
