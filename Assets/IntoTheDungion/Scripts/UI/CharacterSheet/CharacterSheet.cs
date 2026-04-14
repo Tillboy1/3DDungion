@@ -17,8 +17,8 @@ public class CharacterSheet : MonoBehaviour
     public TMP_Text Health;
     public TMP_Text TempHealth;
 
-    [Header("Abilities")]
     //                                      Ability
+    [Header("Abilities")]
     public GameObject AbilityScreen;
 
     public GameObject[] AbilityIcons = new GameObject[10];
@@ -65,9 +65,25 @@ public class CharacterSheet : MonoBehaviour
     public TMP_Text EquipmentDescriptionText;
     public TMP_Text EquipmentClassText;
 
-    [Header("Skills")]
     //                                      Equipment
+    [Header("Skills")]
     public GameObject SkillsScreen;
+
+
+    //                                      Equipment
+    [Header("LevelingUp")]
+    public GameObject LevelupScreen;
+    public TMP_Text LevelupCurrentText;
+
+    public int LastSeenLevel;
+
+    public int ModifiresIncresed, ClassLevelUps;
+    public List<AbilitiesBase> RecentUnlockAbilities;
+
+    public GameObject newAdditions;
+    public Sprite Modsprite, ClassSprite;
+    public GameObject StatIncreasePrefab, AbillityAdditionPrefab;
+    public int ScaleAddPerPrefab;
 
     public void Start()
     {
@@ -257,6 +273,11 @@ public class CharacterSheet : MonoBehaviour
         ShowAbilities();
         ShowWeapons();
         ShowArmour();
+
+        if (Player.CurrentLevel.Value != LastSeenLevel)
+        {
+            ShowLevelScreen();
+        }
     }
     public void SelectedAbilitySlot(int SlotNumber)
     {
@@ -584,6 +605,52 @@ public class CharacterSheet : MonoBehaviour
                 GO.GetComponent<ArmourHolder>().CharacterSheet = this;
             }
         }
+    }
+    #endregion
+
+    #region LevelUpScreen
+    public void ShowLevelScreen()
+    {
+        if(ModifiresIncresed > 0)
+        {
+            var GO = Instantiate(StatIncreasePrefab, newAdditions.transform);
+            GO.transform.GetChild(0).GetComponent<Image>().sprite = Modsprite;
+            GO.transform.GetChild(1).GetComponent<TMP_Text>().text = new string("moddifires possible now set to " + (ModifiresIncresed + Player.ModifierStatsRemaining));
+        }
+        if (ClassLevelUps > 0)
+        {
+            var GO = Instantiate(StatIncreasePrefab, newAdditions.transform);
+            GO.transform.GetChild(0).GetComponent<Image>().sprite = ClassSprite;
+            GO.transform.GetChild(1).GetComponent<TMP_Text>().text = new string("Class Upgraded possible now set to " + (ClassLevelUps + Player.ClassStatsRemaining));
+        }
+
+        // adds as much space as the added abilitys take up and sets it to the top for ease of reading
+        if (RecentUnlockAbilities.Count > 0)
+        {
+            if (RecentUnlockAbilities.Count + 2 >= 4)
+            {
+                newAdditions.GetComponent<RectTransform>().localScale = new Vector2(500, 450 + ScaleAddPerPrefab * (RecentUnlockAbilities.Count - 1));
+                newAdditions.GetComponent<RectTransform>().localPosition = new Vector2(0, 10000);
+            }
+            for (int i = 0; i < RecentUnlockAbilities.Count; i++)
+            {
+                var GO = Instantiate(AbillityAdditionPrefab, newAdditions.transform);
+                GO.transform.GetChild(0).GetComponent<Image>().sprite = RecentUnlockAbilities[i].sprite;
+                GO.transform.GetChild(1).GetComponent<TMP_Text>().text = RecentUnlockAbilities[i].name;
+                GO.transform.GetChild(2).GetComponent<TMP_Text>().text = RecentUnlockAbilities[i].Description;
+            }
+        }
+    }
+    public void ConfirmLevelUps()
+    {
+        LastSeenLevel = Player.CurrentLevel.Value;
+
+        ModifiresIncresed = 0;
+        ClassLevelUps = 0;
+
+        RecentUnlockAbilities.Clear();
+
+        LevelupScreen.SetActive(false);
     }
     #endregion
 }
