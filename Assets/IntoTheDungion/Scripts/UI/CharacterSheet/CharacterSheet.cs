@@ -265,6 +265,7 @@ public class CharacterSheet : MonoBehaviour
             else if (objects.gameObject.name == "Skills")
             {
                 SkillsScreen = objects.gameObject;
+                SkillsScreen.GetComponent<SkillTree>().player = Player;
             }
         }
 

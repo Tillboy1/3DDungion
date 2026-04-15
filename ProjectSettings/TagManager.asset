@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TestUsage
   - UI
+  - Data Stores
   layers:
   - Default
   - TransparentFX
