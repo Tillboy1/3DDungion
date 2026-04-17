@@ -2615,6 +2615,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 451832847}
     m_Modifications:
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0065
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064123169039217994, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5601731509590984938, guid: 69fd7b6a51ee73b43813975261bbd8b9, type: 3}
       propertyPath: m_Name
       value: Doorway (1)
@@ -6583,7 +6615,7 @@ MonoBehaviour:
   amountOfAttacks: 0
   attackSpeed: 0
   attacksPossible: []
-  XPOnDeath: 10
+  XPOnDeath: 100
   Attackers: []
   TargetGO: {fileID: 0}
   Players: []

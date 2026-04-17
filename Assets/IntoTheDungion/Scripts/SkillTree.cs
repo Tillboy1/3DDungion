@@ -22,7 +22,7 @@ public class SkillTree : MonoBehaviour
     public float Scaleamount;
     public float ScaleamountMin, ScaleamountMax;
     public float Scrollamount;
-    public Transform HollowClass, HollowProff;
+    public Transform HollowClass;
     private GameObject[] AbilitiesBoxes;
 
     public void Awake()
@@ -41,7 +41,6 @@ public class SkillTree : MonoBehaviour
 
         DataScreen = this.transform.Find("Info Screen").gameObject;
         HollowClass = this.transform.Find("Base").transform.GetChild(0).GetComponent<Transform>();
-        HollowProff = this.transform.Find("Base Profession").transform.GetChild(0).GetComponent<Transform>();
 
         DataTitleText = DataScreen.transform.Find("Title").GetComponent<Text>();
         DataCurrentSkillText = DataScreen.transform.Find("Skill Level").GetComponent<Text>();
@@ -52,6 +51,8 @@ public class SkillTree : MonoBehaviour
         DataButton = DataScreen.transform.Find("Button").GetComponent<Button>();
 
         //Getting data from other stats
+
+        player = this.transform.parent.GetComponent<CharacterSheet>().Player;
 
         CurrentClasspoints = player.ClassStatsRemaining;
         skillpointcounts = player.ModifierStatsRemaining;
@@ -64,10 +65,12 @@ public class SkillTree : MonoBehaviour
     }
     public void Update()
     {
+        /*
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {
             ZoomInOut((Input.GetAxisRaw("Mouse ScrollWheel")));
         }
+        */
 
         if (0 < Scrollamount)
         {
@@ -103,6 +106,7 @@ public class SkillTree : MonoBehaviour
         CurrentClasspoints = player.ClassStatsRemaining;
         skillpointcounts = player.ModifierStatsRemaining;
 
+        /*
         if (!DataSCOn && Input.GetKeyDown(KeyCode.Escape))
         {
             skillTreeGO.SetActive(false);
@@ -112,6 +116,7 @@ public class SkillTree : MonoBehaviour
         {
             DataScreenClose();
         }
+        */
     }
     /*
     public enum Type
@@ -183,13 +188,11 @@ public class SkillTree : MonoBehaviour
     public void Goto0()
     {
         HollowClass.transform.localPosition = new Vector3(0, 0, 0);
-        HollowProff.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void GotoSkills(Vector3 locationChosen)
     {
         HollowClass.transform.localPosition = -locationChosen;
-        HollowProff.transform.localPosition = -locationChosen;
     }
     #endregion
 }
