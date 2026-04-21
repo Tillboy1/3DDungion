@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class AOEHitArea : MonoBehaviour
@@ -17,7 +18,6 @@ public class AOEHitArea : MonoBehaviour
     public bool AbleToLeave;
     public float ScaleAmount;
     public bool WillFollow;
-    //public bool isavbe;
 
     private void Start()
     {
@@ -33,14 +33,21 @@ public class AOEHitArea : MonoBehaviour
         {
             this.transform.localScale = new Vector3(this.transform.localScale.x + 0.1f * Time.deltaTime, this.transform.localScale.y + 0.1f * Time.deltaTime, this.transform.localScale.z + 0.1f * Time.deltaTime);
         }
+        if (WillFollow)
+        {
+            if (abilityConnected.SpawnOnPointer)
+            {
+                this.transform.position = Creater.GetComponent<PlayerMovement>().hitPosition;
+            }
+            else
+            {
+                this.transform.position = Creater.transform.position;
+            }
+        }
     }
     public void Activate()
     {
         StartCoroutine(startedCountdown());
-    }
-    public void Returninfo()
-    {
-        //Caller
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,8 +65,6 @@ public class AOEHitArea : MonoBehaviour
     IEnumerator startedCountdown()
     {
         yield return new WaitForSeconds(TimeToDestroy);
-        Returninfo();
-        yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
     }
     IEnumerator Effect()
