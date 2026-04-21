@@ -6,13 +6,18 @@ public class AOEHitArea : MonoBehaviour
 {
     [Header("Base Requirements")]
     public GameObject Creater;
+    public AOEAbilityBase abilityConnected;
     public Collider collid;
     public List<GameObject> ObjectsinArea;
 
     public float TimeToDestroy;
+    public float TimeBetweenEffects;
+    public bool BetweenEffects;
+
     public bool AbleToLeave;
     public float ScaleAmount;
-    public bool isavbe;
+    public bool WillFollow;
+    //public bool isavbe;
 
     private void Start()
     {
@@ -20,6 +25,10 @@ public class AOEHitArea : MonoBehaviour
     }
     private void Update()
     {
+        if (!BetweenEffects)
+        {
+            StartCoroutine(Effect());
+        }
         if (this.transform.localScale.x < ScaleAmount || this.transform.localScale.y < ScaleAmount || this.transform.localScale.z < ScaleAmount)
         {
             this.transform.localScale = new Vector3(this.transform.localScale.x + 0.1f * Time.deltaTime, this.transform.localScale.y + 0.1f * Time.deltaTime, this.transform.localScale.z + 0.1f * Time.deltaTime);
@@ -27,7 +36,7 @@ public class AOEHitArea : MonoBehaviour
     }
     public void Activate()
     {
-
+        StartCoroutine(startedCountdown());
     }
     public void Returninfo()
     {
@@ -52,5 +61,12 @@ public class AOEHitArea : MonoBehaviour
         Returninfo();
         yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
+    }
+    IEnumerator Effect()
+    {
+        BetweenEffects = true;
+        abilityConnected.CheckAOE();
+        yield return new WaitForSeconds(TimeBetweenEffects);
+        BetweenEffects = false;
     }
 }

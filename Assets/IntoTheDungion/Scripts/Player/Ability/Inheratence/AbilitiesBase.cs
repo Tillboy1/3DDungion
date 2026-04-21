@@ -32,7 +32,6 @@ public class AbilitiesBase : ScriptableObject
     public int[] LvlAddition;
 
     public virtual void Activate(GameObject Player) {}
-
     public void AbilityAddXP()
     {
         if (CurrentLevel != MaxLevel)
