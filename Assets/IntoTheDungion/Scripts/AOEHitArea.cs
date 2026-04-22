@@ -52,6 +52,7 @@ public class AOEHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         ObjectsinArea.Add(other.gameObject);
     }
     private void OnTriggerExit(Collider other)
@@ -70,6 +71,7 @@ public class AOEHitArea : MonoBehaviour
     IEnumerator Effect()
     {
         BetweenEffects = true;
+        Debug.Log("Effect Started");
         abilityConnected.CheckAOE();
         yield return new WaitForSeconds(TimeBetweenEffects);
         BetweenEffects = false;

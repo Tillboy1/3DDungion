@@ -48,6 +48,7 @@ public class AOEAbilityBase : AbilitiesBase
                 GO.transform.position = Player.transform.position;
             }
         }
+        AOEHA.Activate();
     }
 
     public void CheckAOE()
@@ -62,8 +63,10 @@ public class AOEAbilityBase : AbilitiesBase
         {
             for (int i = 0; i < CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea.Count; i++)
             {
+                Debug.Log(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i].name);
                 if (!AllToEffect.Contains(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i]))
                 {
+                    Debug.Log("Added Item");
                     AllToEffect.Add(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i]);
                 }
             }

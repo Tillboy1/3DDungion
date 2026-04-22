@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2c670c2487e574f9ab50b5ae42635a, type: 3}
+  m_Name: FlameAura
+  m_EditorClassIdentifier: Assembly-CSharp::DamagingArea
+  Name: FlameAura
+  Description: Creates a birst of fire damaging eveyone but the caster within range
+  ClassRequired: DPS
+  sprite: {fileID: 21300000, guid: f80defe91ce6415468a5d0d09b84c985, type: 3}
+  CastingTime: 2
+  DurationTime: 0
+  RefreshTime: 30
+  AbilityState: 3
+  RemainingCasting: -0.0013565924
+  RemainingDuration: 0
+  RemainingRefresh: 25.22517
+  AbilityRange: 0
+  CurrentLevel: 1
+  MaxLevel: 10
+  CurrentEX: 0
+  EXPToLevel: 1
+  EXPDifficulties: 
+  LvlAddition: 
+  AllToEffect:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player: {fileID: 0}
+  AOEPrefab: {fileID: 1564568325619289681, guid: a8588c66173d6b84a93d641e4d947451, type: 3}
+  CurrentAOE: {fileID: 0}
+  EffectsCaster: 1
+  SpawnOnPointer: 0
+  AOEDuration: 1
+  AOEBetweenEffects: 9
+  ScaleAmount: 1
+  AbleToLeave: 0
+  FollowsAfter: 0
+  Damage: 15
