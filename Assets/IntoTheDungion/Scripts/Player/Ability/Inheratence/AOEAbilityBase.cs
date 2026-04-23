@@ -56,14 +56,15 @@ public class AOEAbilityBase : AbilitiesBase
         #region Checks whats in the region
         if (AbleToLeave)
         {
+            Debug.Log("going  1");
             AllToEffect.Clear();
             AllToEffect = CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea;
         }
         else
         {
+            Debug.Log("going  2 for " + CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea.Count);
             for (int i = 0; i < CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea.Count; i++)
             {
-                Debug.Log(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i].name);
                 if (!AllToEffect.Contains(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i]))
                 {
                     Debug.Log("Added Item");

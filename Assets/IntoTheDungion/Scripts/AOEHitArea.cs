@@ -52,7 +52,6 @@ public class AOEHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         ObjectsinArea.Add(other.gameObject);
     }
     private void OnTriggerExit(Collider other)
