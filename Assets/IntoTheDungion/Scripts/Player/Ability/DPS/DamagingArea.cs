@@ -7,7 +7,8 @@ public class DamagingArea : AOEAbilityBase
     public int Damage;
     public override void Effect()
     {
-        Debug.Log("Effect");
+        Debug.Log(AllToEffect.Count);
+
         for (int i = 0; i < AllToEffect.Count; i++)
         {
             Debug.Log("got to count of " + i);

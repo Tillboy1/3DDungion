@@ -20,9 +20,9 @@ MonoBehaviour:
   DurationTime: 0
   RefreshTime: 30
   AbilityState: 3
-  RemainingCasting: -0.0010792396
+  RemainingCasting: -0.01486491
   RemainingDuration: 0
-  RemainingRefresh: 15.910671
+  RemainingRefresh: 0
   AbilityRange: 0
   CurrentLevel: 1
   MaxLevel: 10
@@ -31,28 +31,6 @@ MonoBehaviour:
   EXPDifficulties: 
   LvlAddition: 
   AllToEffect:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

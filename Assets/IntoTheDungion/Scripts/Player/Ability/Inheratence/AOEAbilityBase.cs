@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AOEAbilityBase : AbilitiesBase
@@ -62,15 +61,23 @@ public class AOEAbilityBase : AbilitiesBase
         }
         else
         {
+            AllToEffect.Clear();
             Debug.Log("going  2 for " + CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea.Count);
             for (int i = 0; i < CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea.Count; i++)
             {
+                /*
                 if (!AllToEffect.Contains(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i]))
                 {
                     Debug.Log("Added Item");
                     AllToEffect.Add(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i]);
                 }
+                */
+
+                //AllToEffect.Add(CurrentAOE.GetComponent<AOEHitArea>().ObjectsinArea[i].gameObject);
+                AllToEffect.Add(player.gameObject);
             }
+
+            Debug.Log(AllToEffect.Count);
         }
         #endregion
 

@@ -602,7 +602,8 @@ MonoBehaviour:
   - 2000
   - 2500
   isCasting: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11400000, guid: 806f5f642fbeff845a9da424708c8844, type: 2}
   ActiveAbilities:
   - {fileID: 0}
   - {fileID: 0}
