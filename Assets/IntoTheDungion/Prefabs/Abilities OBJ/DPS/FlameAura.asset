@@ -19,10 +19,10 @@ MonoBehaviour:
   CastingTime: 2
   DurationTime: 0
   RefreshTime: 30
-  AbilityState: 0
-  RemainingCasting: -0.0015177936
+  AbilityState: 3
+  RemainingCasting: -0.01486491
   RemainingDuration: 0
-  RemainingRefresh: -0.12933938
+  RemainingRefresh: 0
   AbilityRange: 0
   CurrentLevel: 1
   MaxLevel: 10
@@ -30,7 +30,12 @@ MonoBehaviour:
   EXPToLevel: 1
   EXPDifficulties: 
   LvlAddition: 
-  AllToEffect: []
+  AllToEffect:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 0}
   AOEPrefab: {fileID: 1564568325619289681, guid: a8588c66173d6b84a93d641e4d947451, type: 3}
   CurrentAOE: {fileID: 0}
