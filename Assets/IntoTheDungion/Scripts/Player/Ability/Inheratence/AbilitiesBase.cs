@@ -9,8 +9,6 @@ public class AbilitiesBase : ScriptableObject
     public string ClassRequired;
     public Sprite sprite;
 
-    public AbilityCast ACaster;
-
     [Header("Casting")]
     public float CastingTime;
     public float DurationTime;
@@ -25,8 +23,10 @@ public class AbilitiesBase : ScriptableObject
     public int AbilityRange;
 
     [Header("Leveling UP")]
+    public int CurrentLevel = 1;
     public int MaxLevel = 10;
 
+    public int CurrentEX;
     public int EXPToLevel = 1;
     public int[] EXPDifficulties;
     public int[] LvlAddition;
@@ -34,17 +34,17 @@ public class AbilitiesBase : ScriptableObject
     public virtual void Activate(GameObject Player) {}
     public void AbilityAddXP()
     {
-        if (ACaster.CurrentLevel.Value != MaxLevel)
+        if (CurrentLevel != MaxLevel)
         {
-            if (EXPToLevel >= ACaster.CurrentEX.Value++)
+            if (EXPToLevel == CurrentEX++)
             {
-                ACaster.CurrentEX.Value -= EXPToLevel;
-                ACaster.CurrentLevel.Value++;
+                CurrentEX = 0;
+                CurrentLevel++;
 
                 // increases the xp required
                 for(int i = 0; i < EXPDifficulties.Length; i++)
                 {
-                    if(ACaster.CurrentLevel.Value == EXPDifficulties[i])
+                    if(CurrentLevel == EXPDifficulties[i])
                     {
                         EXPToLevel++;
                     }

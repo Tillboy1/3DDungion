@@ -780,39 +780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f80a0ea0948f144996db710613361d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  ShowTopMostFoldoutHeaderGroup: 1
-  CurrentCastingCalldown:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  CurrentActiveCalldown:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  CurrentResetCalldown:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  status: 0
-  CurrentLevel:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 1
-  CurrentEX:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 0
-  details: {fileID: 11400000, guid: b0eda754f07c7e449b1994cc5ecbd396, type: 2}
-  isCasting:
-    UpdateTraits:
-      MinSecondsBetweenUpdates: 0
-      MaxSecondsBetweenUpdates: 0
-    m_InternalValue: 1
 --- !u!1 &5852634410324412905
 GameObject:
   m_ObjectHideFlags: 0

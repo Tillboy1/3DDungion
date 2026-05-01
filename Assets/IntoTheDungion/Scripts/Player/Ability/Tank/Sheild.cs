@@ -8,6 +8,6 @@ public class Sheild : AbilitiesBase
     {
         PlayerStats stats = player.GetComponent<PlayerStats>();
 
-        stats.Sheild.Value = ShildAmount * ACaster.CurrentLevel.Value;
+        stats.Sheild.Value = ShildAmount * CurrentLevel;
     }
 }
