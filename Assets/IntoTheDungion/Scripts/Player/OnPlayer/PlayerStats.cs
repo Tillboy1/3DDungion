@@ -162,7 +162,6 @@ public class PlayerStats : NetworkBehaviour
 
     private void Update()
     {
-        CheckAbilities();
         CheckConditions();
 
         if (AbleToAttack && primaryAttack && Targeting != null)
@@ -443,56 +442,6 @@ public class PlayerStats : NetworkBehaviour
     }
     #endregion
     #region Abilities
-    public void CheckAbilities()
-    {
-        for(int i = 0;i < ActiveAbilities.Length; i++)
-        {
-            if (ActiveAbilities[i] != null)
-            {
-                switch (ActiveAbilities[i].AbilityState)
-                {
-                    case AbilityState.Ready:
-                        // Done with input actions
-                        break;
-                    case AbilityState.Casting:
-                        isCasting = true;
-                        if (ActiveAbilities[i].RemainingCasting > 0)
-                        {
-                            ActiveAbilities[i].RemainingCasting -= Time.deltaTime;
-                        }
-                        else
-                        {
-                            ActiveAbilities[i].Activate(this.gameObject);
-                            ActiveAbilities[i].RemainingDuration = ActiveAbilities[i].DurationTime;
-                            ActiveAbilities[i].AbilityState = AbilityState.Undergoing;
-                        }
-                        break;
-                    case AbilityState.Undergoing:
-                        if (ActiveAbilities[i].RemainingDuration > 0)
-                        {
-                            ActiveAbilities[i].RemainingDuration -= Time.deltaTime;
-                        }
-                        else
-                        {
-                            isCasting = false;
-                            ActiveAbilities[i].RemainingRefresh = ActiveAbilities[i].RefreshTime;
-                            ActiveAbilities[i].AbilityState = AbilityState.Cooldown;
-                        }
-                        break;
-                    case AbilityState.Cooldown:
-                        if (ActiveAbilities[i].RemainingRefresh > 0)
-                        {
-                            ActiveAbilities[i].RemainingRefresh -= Time.deltaTime;
-                        }
-                        else
-                        {
-                            ActiveAbilities[i].AbilityState = AbilityState.Ready;
-                        }
-                        break;
-                }
-            }
-        }
-    }
 
     #region AbilityButtons
     public void ActivateAbilityOne(InputAction.CallbackContext context)

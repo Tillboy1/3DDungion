@@ -18,7 +18,7 @@ public class AbilityHolder : SkillBase
         {
             if (skilltree.player.Abilities[i].name == Ability.Name)
             {
-                CurrentLvl = Ability.CurrentLevel;
+                CurrentLvl = Ability.ACaster.CurrentLevel.Value;
                 MaxLvl = Ability.MaxLevel;
                 return;
             }
@@ -71,9 +71,9 @@ public class AbilityHolder : SkillBase
         {
             if (skilltree.player.Abilities[i].name == Ability.Name)
             {
-                if (skilltree.player.Abilities[i].CurrentLevel < skilltree.player.Abilities[i].MaxLevel)
+                if (skilltree.player.Abilities[i].ACaster.CurrentLevel.Value < skilltree.player.Abilities[i].MaxLevel)
                 {
-                    skilltree.player.Abilities[i].CurrentLevel++;
+                    skilltree.player.Abilities[i].ACaster.CurrentLevel.Value++;
                 }
                 anyfound = true;
                 return;
