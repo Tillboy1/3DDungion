@@ -86,6 +86,16 @@ public class PlayerMovement : NetworkBehaviour
                     this.GetComponent<PlayerStats>().Targeting = rayinfo.collider.gameObject;
                     this.GetComponent<PlayerStats>().TryingToLock = false;
                 }
+                else if (rayinfo.collider.GetComponent<MerchantShop>())
+                {
+                    Debug.Log("Clicked on a shop");
+                    this.GetComponent<PlayerStats>().TryingToLock = false;
+                }
+                else if (rayinfo.collider.GetComponent<Forge>())
+                {
+                    Debug.Log("Clicked on a Forge");
+                    this.GetComponent<PlayerStats>().TryingToLock = false;
+                }
                 else
                 {
                     this.GetComponent<PlayerStats>().TryingToLock = false;

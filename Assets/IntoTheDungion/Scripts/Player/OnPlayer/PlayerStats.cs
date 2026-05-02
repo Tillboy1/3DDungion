@@ -30,6 +30,8 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject HealthUI;
     public GameObject CharacterSheet;
+    public GameObject ShopUI;
+    public GameObject ForgeUI;
     public Sprite CharacterSprite;
 
     [Header("camera")]
@@ -140,6 +142,8 @@ public class PlayerStats : NetworkBehaviour
 
             HealthUI = Menu.GetComponentInChildren<TeamHealthUI>().gameObject;
             CharacterSheet = Menu.transform.GetChild(2).gameObject;
+            ShopUI = Menu.transform.GetChild(4).gameObject;
+            ForgeUI = Menu.transform.GetChild(5).gameObject;
 
             Menu.GetComponentInChildren<TeamHealthUI>().PlayerObj = this.gameObject;
             Menu.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<TeamHealthUI>().PlayerObj = this.gameObject;
