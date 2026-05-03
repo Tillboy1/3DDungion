@@ -175,6 +175,7 @@ public class SkillTree : MonoBehaviour
 
     public void OpenDataScreen(GameObject ButtonClicked)
     {
+        Debug.Log("going to " + ButtonClicked.name);
         DataSCOn = true;
         GoToButton(ButtonClicked);
         DataScreen.SetActive(true);

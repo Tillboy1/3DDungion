@@ -13,35 +13,51 @@ public class AbilityHolder : SkillBase
 
     public override void Interact()
     {
+        bool FoundTarget = false;
         // Checks if the ability isalready contained by the player and shows the level of the ability of the ability
         for (int i = 0; i < skilltree.player.Abilities.Count; i++)
         {
             if (skilltree.player.Abilities[i].name == Ability.Name)
             {
-                CurrentLvl = Ability.CurrentLevel;
-                MaxLvl = Ability.MaxLevel;
-                return;
+                CurrentLvl = skilltree.player.Abilities[i].CurrentLevel;
+                MaxLvl = skilltree.player.Abilities[i].MaxLevel;
+
+                FoundTarget = true;
+                Debug.Log("Found ability");
             }
+        }
+        if(FoundTarget == false)
+        {
+            CurrentLvl = Ability.CurrentLevel;
+            MaxLvl = Ability.MaxLevel;
+            Debug.Log("Giving ability");
         }
 
         skilltree.DataTitleText.text = Ability.name;
+
 
         if (CurrentLvl >= MaxLvl)
         {
             skilltree.DataCurrentSkillText.text = "Max";
             skilltree.DataButton.gameObject.SetActive(false);
+
+            Debug.Log("maxed Out");
         }
-        else if (CurrentLvl < MaxLvl && CurrentLvl > 0)
+        else if (CurrentLvl < MaxLvl && CurrentLvl >= 0 || FoundTarget)
         {
             skilltree.DataCurrentSkillText.text = "Level " + CurrentLvl.ToString();
             skilltree.DataButton.transform.GetChild(0).GetComponent<Text>().text = "Level Up";
             skilltree.DataButton.gameObject.SetActive(true);
+
+            Debug.Log("middle of the road");
         }
-        else
+        else if (FoundTarget == false)
         {
             skilltree.DataCurrentSkillText.text = "Locked";
             skilltree.DataButton.transform.GetChild(0).GetComponent<Text>().text = "Unlock";
             skilltree.DataButton.gameObject.SetActive(true);
+
+            Debug.Log("not unlocked");
         }
 
 
@@ -51,10 +67,12 @@ public class AbilityHolder : SkillBase
         // Cnages the text if is just a ability or a entire class
         if (isForClass)
         {
+            Debug.Log("checking ClassSkills");
             skilltree.DataSkillCost.text = skilltree.CurrentClasspoints + "/" + Cost.ToString();
         }
         else
         {
+            Debug.Log("checking Skillpoints");
             skilltree.DataSkillCost.text = skilltree.skillpointcounts + "/" + Cost.ToString();
         }
 
