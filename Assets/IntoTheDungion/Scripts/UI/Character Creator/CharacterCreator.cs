@@ -29,6 +29,7 @@ public class CharacterCreator : MonoBehaviour
         {
             case 0:
                 ClassSelected = 0;
+                SubDropdown.options.Clear();
                 SubDropdown.options.Add(new TMP_Dropdown.OptionData("Sheild Focused"));
                 SubDropdown.options.Add(new TMP_Dropdown.OptionData("Health Focused"));
                 SubDropdown.options.Add(new TMP_Dropdown.OptionData("Damage Focused"));
