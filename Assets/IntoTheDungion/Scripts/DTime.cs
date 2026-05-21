@@ -10,13 +10,11 @@ public class DTime : MonoBehaviour
 
     [Header("Gets the Text")]
     public List<GameObject> Players;
-    public TMP_Text TimerText;
 
     [Header("Counters")]
     [Tooltip("counted in minutes")]
     public float TimeGiven;
     public float Remaining;
-    public int Remaintextcount;
 
     [Header("Enemies")]
     public List<GameObject> bosses;
@@ -40,9 +38,9 @@ public class DTime : MonoBehaviour
         {
             foreach (Transform T2 in T.transform)
             {
-                if (T2.GetComponent<MassEnemy>())
+                if (T2.GetComponent<BossEnemy>())
                 {
-                    enemies.Add(T2.gameObject);
+                    bosses.Add(T2.gameObject);
                 }
                 else if (T2.GetComponent<MassEnemy>())
                 {
@@ -112,6 +110,7 @@ public class DTime : MonoBehaviour
                 //WinScreen
                 for (int i = 0; i < Players.Count; i++)
                 {
+                    Players[i].GetComponent<PlayerStats>().ConclusionUI.SetActive(true);
                     Players[i].GetComponent<PlayerStats>().ConclusionUI.GetComponent<ConclusionScreen>().OpenConclusion(true, Remaining);
                 }
             }
@@ -122,6 +121,7 @@ public class DTime : MonoBehaviour
 
             for (int i = 0; i < Players.Count; i++)
             {
+                Players[i].GetComponent<PlayerStats>().ConclusionUI.SetActive(true);
                 Players[i].GetComponent<PlayerStats>().ConclusionUI.GetComponent<ConclusionScreen>().OpenConclusion(false, Remaining);
             }
         }

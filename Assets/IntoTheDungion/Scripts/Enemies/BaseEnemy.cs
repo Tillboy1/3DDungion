@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
+using UnityEngine.AI;
 
 public enum AttackDirection
 {
@@ -58,32 +58,87 @@ public class BaseEnemy : MonoBehaviour
     public float speed;
     public bool AbleToMove;
 
-    public void ClosesestPlayer()
+
+
+    public NavMeshAgent agent;
+    public Transform player;
+    public LayerMask whatatisground, whatisplayer;
+    public bool PlayerInRange;
+
+    //patrolling
+    public Vector3 walkpoint;
+    protected bool walkpointset;
+    public float walkPointRange;
+
+    //Attacking
+    public int baseDamage;
+    public float timeBetweenAttacks;
+    protected bool alreadyatacked;
+
+    //states
+    public float sightRange, attackRange;
+    public bool playerinsightRange, playerInAttackRange;
+
+    private void Awake()
     {
-        float TempPlayerDistances = 1000000000;
-        if (Players.Count > 0)
+        agent = GetComponent<NavMeshAgent>();
+    }
+    private void Start()
+    {
+        currentHealth.Value = maxHealth;
+    }
+    private void Update()
+    {
+        //Check for sight and attack range
+        playerinsightRange = Physics.CheckSphere(transform.position, sightRange, whatisplayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatisplayer);
+
+        if (!playerinsightRange && !playerInAttackRange) Patroling();
+        if (playerinsightRange && !playerInAttackRange) ChasePlayer();
+        if (playerinsightRange && playerInAttackRange) AttackPlayer();
+    }
+    private void Patroling()
+    {
+        if (!walkpointset) Searchwalkpoint();
+
+        if (walkpointset)
+            agent.SetDestination(walkpoint);
+
+        Vector3 distancetowalkpoint = transform.position - walkpoint;
+
+        //walkpointreached
+        if (distancetowalkpoint.magnitude < 1f)
+            walkpointset = false;
+    }
+    private void Searchwalkpoint()
+    {
+        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+
+        walkpoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkpoint, -transform.up, 2f, whatatisground))
+            walkpointset = true;
+    }
+    private void ChasePlayer()
+    {
+        agent.SetDestination(player.position);
+    }
+    public virtual void AttackPlayer()
+    {
+        //make sure enemydosn't move
+        agent.SetDestination(transform.position);
+
+        transform.LookAt(player);
+        if (!alreadyatacked)
         {
-            distToPoint = Vector2.Distance(transform.position, Players[0].transform.position);
-            TargetGO = Players[0];
-        }
-        else
-        {
-            Debug.Log("player more");
-            distToPoint = Vector2.Distance(transform.position, Players[0].transform.position);
-            TargetGO = Players[0];
-            for (int i = 0; i < Players.Count; i++)
-            {
-                TempPlayerDistances = Vector2.Distance(transform.position, Players[i].transform.position);
-                if (TempPlayerDistances < distToPoint)
-                {
-                    distToPoint = TempPlayerDistances;
-                    TargetGO = Players[i];
-                }
-                if (TempPlayerDistances == distToPoint)
-                {
-                    Debug.Log("Same");
-                }
-            }
+            //Attack code input here
+            player.GetComponent<PlayerStats>().TakeDamage(baseDamage);
+
+
+            /////
+            alreadyatacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
@@ -127,6 +182,54 @@ public class BaseEnemy : MonoBehaviour
             }
         }
         this.gameObject.SetActive(false);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+     //
+    public virtual void Respawn()
+    {
+        currentHealth.Value = maxHealth;
+        this.gameObject.SetActive(true);
+    }
+
+    private void ResetAttack()
+    {
+        alreadyatacked = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerStats>())
+        {
+            player = other.transform;
+            PlayerInRange = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PlayerStats>())
+        {
+            player = null;
+            PlayerInRange = false;
+        }
     }
 }
 public class Attacklist
@@ -178,3 +281,7 @@ public class AttacksSlots
     public int attackDamageMin;
     public int attackDamageMax;
 }
+
+
+
+
