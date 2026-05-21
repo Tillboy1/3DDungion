@@ -31,5 +31,7 @@ public class PlayerManager : NetworkBehaviour
         {
             PlayerJoining.GetComponent<PlayerStats>().HealthUI.GetComponent<TeamHealthUI>().PlayerCheck();
         }
+
+        DTime.instance.CheckPlayers();
     }
 }
