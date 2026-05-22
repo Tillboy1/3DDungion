@@ -7,9 +7,7 @@ public class CallDead : AbilitiesBase
 
     public override void Activate(GameObject Player)
     {
-        Debug.Log("activated");
         var go = Instantiate(DeadToSummon, Player.transform.parent);
-
-        go.transform.position = new Vector3(0, 4, 0);
+        go.transform.localPosition = new Vector3(0, 4, 0);
     }
 }

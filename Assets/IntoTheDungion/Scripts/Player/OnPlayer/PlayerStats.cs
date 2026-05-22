@@ -225,7 +225,7 @@ public class PlayerStats : NetworkBehaviour
         {
             if (distance <= CurrentWeapon.AttackRange)
             {
-                Debug.Log("attack working at range of " + distance + "from " + CurrentWeapon.AttackRange);
+                //Debug.Log("attack working at range of " + distance + "from " + CurrentWeapon.AttackRange);
                 //Debug.Log("in line of Sight");
                 if (playerTotarget.transform.GetComponent<BaseEnemy>() && !primaryHeals && CurrentWeapon is MeleeWeapon)
                 {
@@ -246,7 +246,7 @@ public class PlayerStats : NetworkBehaviour
             }
             else
             {
-                Debug.Log("the distance was " + distance);
+                //Debug.Log("the distance was " + distance);
             }
         }
         else

@@ -6,11 +6,6 @@ public class UndyingRapture : AbilitiesBase
 {
     public PoisonedCondtion PoisonedCondtion;
 
-    public void Start()
-    {
-        PoisonedCondtion.TotalTime = 12;
-        PoisonedCondtion.damageInflicted = 2;
-    }
     public override void Activate(GameObject player)
     {
         Debug.Log("Activated");

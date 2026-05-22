@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class BossEnemy : BaseEnemy
 {
     public AbilitiesBase BossAbility;
+    public bool EffectSelf;
 
     protected override void Update()
     {
@@ -22,7 +23,15 @@ public class BossEnemy : BaseEnemy
                     }
                     else
                     {
-                        BossAbility.Activate(this.gameObject);
+                        if (EffectSelf)
+                        {
+                            BossAbility.Activate(this.gameObject);
+                        }
+                        else
+                        {
+                            Debug.Log(player);
+                            BossAbility.Activate(player.gameObject);
+                        }
                         BossAbility.RemainingDuration = BossAbility.DurationTime;
                         BossAbility.AbilityState = AbilityState.Undergoing;
                     }
