@@ -157,7 +157,8 @@ public class PlayerStats : NetworkBehaviour
 
             var Cam = Instantiate(CameraPrefab);
 
-            Cam.GetComponent<CameraHolder>().LocationOfset = transform.GetChild(1).gameObject;
+            Cam.GetComponent<CameraOfset>().OfsetPoint = transform.GetChild(1).gameObject;
+            this.GetComponent<PlayerMovement>().CamOfset = Cam.gameObject;
         }
         PlayerManager.instance.PlayerJoined(this.gameObject);
     }

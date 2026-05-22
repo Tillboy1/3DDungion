@@ -181,21 +181,10 @@ public class BaseEnemy : MonoBehaviour
                     Attackers[i].GetComponent<PlayerStats>().Targeting = null;
             }
         }
+
+        DTime.instance.EnemiesKilled++;
         this.gameObject.SetActive(false);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-     //
     public virtual void Respawn()
     {
         currentHealth.Value = maxHealth;
@@ -281,7 +270,3 @@ public class AttacksSlots
     public int attackDamageMin;
     public int attackDamageMax;
 }
-
-
-
-

@@ -19,6 +19,8 @@ public class PlayerMovement : NetworkBehaviour
     public float xRotation;
     public float yRotation;
 
+    public GameObject CamOfset;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -66,6 +68,10 @@ public class PlayerMovement : NetworkBehaviour
     public void Walking()
     {
         rb.position = new Vector3(rb.position.x + (m_moveAmt.y * moveSpeed), rb.position.y, rb.position.z + (-m_moveAmt.x * moveSpeed));
+
+        //Vector2 Direction = CamOfset.transform.forward * m_moveAmt.y + CamOfset.transform.right * m_moveAmt.x;
+
+        //rb.AddForce(Direction.normalized * moveSpeed * 10f, ForceMode.Force);
     }
     public void CharacterLooking()
     {
@@ -112,16 +118,32 @@ public class PlayerMovement : NetworkBehaviour
     #region Camera
     public void PlayerLooking(InputAction.CallbackContext context)
     {
-        TryingToLook = context.ReadValue<bool>();
+        float tempfloat = context.ReadValue<float>();
+        
+        if(tempfloat > 0)
+        {
+            TryingToLook = true;
+        }
+        else
+        {
+            TryingToLook = false;
+        }
     }
     public void TurningCamera()
     {
-        yRotation += m_moveAmt.x;
-        xRotation += m_moveAmt.y;
-        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        Debug.Log(yRotation + " += " + (m_LookAmt.x - 800));
 
-        //rotate cam and orientation
-        transform.GetChild(1).transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        yRotation += (m_LookAmt.x - 800) / 10;
+        //if(yRotation != 0)
+        //{
+        //    yRotation += yRotation / 10;
+        //}
+
+        //xRotation += m_moveAmt.y;
+        //xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+        //rotate cam and orientation                             xRotation
+        CamOfset.transform.rotation = Quaternion.Euler(0, yRotation, 0);
         //orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
     #endregion
