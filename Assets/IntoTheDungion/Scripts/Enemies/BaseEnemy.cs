@@ -87,7 +87,7 @@ public class BaseEnemy : MonoBehaviour
     {
         currentHealth.Value = maxHealth;
     }
-    private void Update()
+    protected virtual void Update()
     {
         //Check for sight and attack range
         playerinsightRange = Physics.CheckSphere(transform.position, sightRange, whatisplayer);
