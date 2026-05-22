@@ -9,25 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ecb2bec900639643b1c790cf0b6a071, type: 3}
-  m_Name: UndyingRapture
-  m_EditorClassIdentifier: Assembly-CSharp::UndyingRapture
-  Name: 
+  m_Script: {fileID: 11500000, guid: 9173340eae745154aacc96773e711f17, type: 3}
+  m_Name: CallDead
+  m_EditorClassIdentifier: Assembly-CSharp::CallDead
+  Name: Summons Dead
   Description: 
   ClassRequired: 
   sprite: {fileID: 0}
-  CastingTime: 0
-  DurationTime: 5
-  RefreshTime: 15
-  AbilityState: 3
+  CastingTime: 4
+  DurationTime: 0
+  RefreshTime: 20
+  AbilityState: 0
   RemainingCasting: 0
   RemainingDuration: 0
   RemainingRefresh: 0
   AbilityRange: 0
-  CurrentLevel: 0
-  MaxLevel: 0
+  CurrentLevel: 1
+  MaxLevel: 10
   CurrentEX: 0
-  EXPToLevel: 0
+  EXPToLevel: 1
   EXPDifficulties: 
   LvlAddition: 
-  PoisonedCondtion: {fileID: 11400000, guid: e55af7fe36f821d439a5c6c7da450f22, type: 2}
+  DeadToSummon: {fileID: 398093394342613674, guid: 2b9b69d86c6cbed42888aa5fc6b32f4a, type: 3}

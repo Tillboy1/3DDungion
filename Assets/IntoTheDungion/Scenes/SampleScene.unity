@@ -3514,8 +3514,16 @@ PrefabInstance:
       value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: walkPointRange
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: currentHealth.m_InternalValue
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5763179626987989332, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: m_LocalScale.x
@@ -4977,6 +4985,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1357861306}
     m_Modifications:
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: baseDamage
       value: 30
       objectReference: {fileID: 0}
@@ -4984,6 +4996,10 @@ PrefabInstance:
       propertyPath: sightRange
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: BossAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: 340994bba94981447bdccc6395b24e02, type: 2}
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: attackRange
       value: 25
@@ -4995,6 +5011,10 @@ PrefabInstance:
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: timeBetweenAttacks
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: currentHealth.m_InternalValue
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5763179626987989332, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10734,12 +10754,20 @@ PrefabInstance:
       value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: BossAbility
       value: 
       objectReference: {fileID: 11400000, guid: e1e504618f1ac7b4cbf406a75f09f88a, type: 2}
     - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: walkPointRange
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127995815779545064, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
+      propertyPath: currentHealth.m_InternalValue
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5763179626987989332, guid: d80647ba777afd342b6991a1e318c6d9, type: 3}
       propertyPath: m_LocalScale.x
